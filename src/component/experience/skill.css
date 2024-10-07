@@ -1,0 +1,36 @@
+.skills-container {
+  display: flex;
+  overflow: hidden;
+  padding: 8rem 0rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.list-skills {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 3rem;
+  animation: slide 20s linear infinite;
+}
+
+.list-skills li {
+  list-style: none;
+}
+
+.list-skills img {
+  width: 2rem;
+  height: 2rem;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

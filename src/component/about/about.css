@@ -1,0 +1,69 @@
+/*ESTILOS ABOUT-ME*/
+.aboutMe {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem;
+}
+
+.texto-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30rem;
+  height: 30rem;
+}
+
+.parrafo {
+  font-size: 1rem;
+  padding-top: 2rem;
+  margin: 0;
+  color: #b3b1b1;
+  font-family: 'Roboto', sans-serif;
+}
+
+.message {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1em;
+  color: #247032;
+}
+
+.avatar {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 980px) {
+  .aboutMe {
+    flex-direction: column-reverse;
+    padding: 0rem;
+  }
+  .img-container {
+    width: 25rem;
+    height: 25rem;
+  }
+  .texto-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (min-width: 700px) {
+  .img-container {
+    width: 30rem;
+    height: 30rem;
+  }
+}
+
+/*FIN ESTILOS ABOUT-ME*/
