@@ -18,7 +18,7 @@ export default function Navbar() {
   useEffect(() => {
     window.addEventListener('resize', handleResize); // Escucha los cambios de tamaño de la ventana
     return () => {
-      window.removeEventListener('resize', handleResize); // Limpieza del evento al desmontar
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
