@@ -3,16 +3,17 @@ import SubTittle from '../../SubTittle';
 import './skill.css';
 
 const skills = [
-  '../../../img/js.png',
-  '../../../img/react.png',
-  '../../../img/html.png',
-  '../../../img/css.png',
-  '../../../img/git.png',
-  '../../../img/github.png',
-  '../../../img/net.png',
-  '../../../img/node.png',
-  '../../../img/sql.png',
-  '../../../img/mongo.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/js.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/react.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/html.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/css.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/git.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/github.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/net.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/C%23.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/node.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/sql.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/mongo.png',
 ];
 
 export default function ListSkills() {
