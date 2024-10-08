@@ -8,7 +8,7 @@ const skills = [
   'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/html.png',
   'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/css.png',
   'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/git.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/github.png',
+  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/gitHub.png',
   'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/net.png',
   'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/C%23.png',
   'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/node.png',
