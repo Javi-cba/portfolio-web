@@ -31,24 +31,24 @@ export default function Navbar() {
 
         <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
           <a className="link" href="#aboutMe">
-            About Me
+            Sobre Mí
           </a>
           <a className="link" href="#experience">
-            Experience
+            Habilidades
           </a>
           <a className="link" href="#projects">
-            Projects
+            Proyectos
           </a>
           {windowWidth <= 700 && (
             <Button>
               <a className="link" href="#contactMe">
-                Contact me
+                Contáctame
               </a>
             </Button>
           )}
         </ul>
 
-        {windowWidth > 700 && <Button>Contact me</Button>}
+        {windowWidth > 700 && <Button>Contáctame</Button>}
       </nav>
     </header>
   );

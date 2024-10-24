@@ -6,18 +6,18 @@ export default function AboutMe() {
   return (
     <section id="aboutMe" className="aboutMe">
       <article className="texto-container ">
-        <h3>Hi, my name is</h3>
+        <h3>Hola, mi nombre es</h3>
         <h1>JAVIER CÓRDOBA</h1>
-        <h2>Software Developer</h2>
+        <h2>Desarrollador de Software</h2>
         <p className="parrafo">
-          Throughout my career as a systems analyst, I have worked with various
-          technologies such as JavaScript, React, React Native, Node.js,
-          ASP.NET, SQL, and MongoDB. This experience has enabled me to manage
-          and develop innovative and scalable solutions. As a result, I am
-          prepared to tackle projects in both backend and frontend development
-          using these technologies.
+          A lo largo de mi carrera como analista de sistemas, he trabajado con
+          diversas tecnologías como JavaScript, React, React Native, Node.js,
+          ASP.NET, SQL y MongoDB. Esta experiencia me ha permitido gestionar y
+          desarrollar soluciones innovadoras y escalables. Como resultado, estoy
+          preparado para abordar proyectos tanto en el desarrollo backend como
+          en el frontend utilizando estas tecnologías.
         </p>
-        <p className="message">Open for Work & Collaboration.</p>
+        <p className="message">Abierto a oportunidades y colaboraciones.</p>
       </article>
 
       <article className="img-container">
