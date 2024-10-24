@@ -48,7 +48,13 @@ export default function Navbar() {
           )}
         </ul>
 
-        {windowWidth > 700 && <Button>Contáctame</Button>}
+        {windowWidth > 700 && (
+          <Button>
+            <a className="link" href="#contactMe">
+              Contáctame
+            </a>{' '}
+          </Button>
+        )}
       </nav>
     </header>
   );

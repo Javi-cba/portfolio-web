@@ -39,7 +39,7 @@ nav h2 {
 
 .link:hover {
   color: #52e96ec5;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /*FIN ESTILOS NAVBAR*/

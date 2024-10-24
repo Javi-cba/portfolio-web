@@ -27,7 +27,26 @@ body {
   font-size: 16px;
 }
 body {
-  padding: 0.5rem;
+  padding: 0rem;
+}
+
+/* Estilo para el scrollbar*/
+html::-webkit-scrollbar {
+  width: 12px !important;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent !important;
+  border-radius: 6px !important;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #1d703294 !important;
+  border-radius: 6px !important;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #1d7032b7 !important;
 }
 
 .divLine-container {
