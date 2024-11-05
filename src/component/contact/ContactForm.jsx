@@ -31,14 +31,14 @@ const ContactForm = () => {
           <GithubOutlined
             className="icon"
             onClick={() => {
-              redirect('https://github.com/javi-cba');
+              window.location.href = 'https://github.com/javi-cba';
             }}
           />
 
           <LinkedinOutlined
             className="icon"
             onClick={() => {
-              redirect('www.linkedin.com/in/javi-cba');
+              window.location.href = 'https://www.linkedin.com/in/javi-cba';
             }}
           />
         </article>
