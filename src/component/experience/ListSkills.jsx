@@ -3,17 +3,19 @@ import SubTittle from '../SubTittle';
 import './skill.css';
 
 const skills = [
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/js.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/react.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/html.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/css.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/git.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/gitHub.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/C%23.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/net.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/node.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/sql.png',
-  'https://mi-proyect1.s3.us-east-2.amazonaws.com/img/mongo.png',
+  'https://i.ibb.co/k6cmZhb/node.png',
+  'https://i.ibb.co/VJBGFQX/react.png',
+  'https://i.ibb.co/3fbMpNg/sql.png',
+  'https://i.ibb.co/zmcqn87/vs.png',
+  'https://i.ibb.co/sbzwqJb/vsc.png',
+  'https://i.ibb.co/N6rqP4g/C.png',
+  'https://i.ibb.co/pLLj4sn/css.png',
+  'https://i.ibb.co/z5zS1LM/git.png',
+  'https://i.ibb.co/3CcWq4L/gitHub.png',
+  'https://i.ibb.co/yQxqwcC/html.png',
+  'https://i.ibb.co/TthrJyY/js.png',
+  'https://i.ibb.co/vxjGgZW/mongo.png',
+  'https://i.ibb.co/LpdTwfs/net.png',
 ];
 
 export default function ListSkills() {

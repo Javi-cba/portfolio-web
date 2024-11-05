@@ -21,10 +21,7 @@ export default function AboutMe() {
       </article>
 
       <article className="img-container">
-        <Avatar
-          className="avatar"
-          src="https://mi-proyect1.s3.us-east-2.amazonaws.com/img/profile.jpg"
-        />
+        <Avatar className="avatar" src="https://i.ibb.co/W3wYp01/profile.jpg" />
       </article>
     </section>
   );

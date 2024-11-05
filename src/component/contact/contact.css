@@ -25,7 +25,7 @@
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
-  gap: 0rem;
+  gap: 0rem 1rem;
   flex-wrap: wrap;
   width: 86%;
 }
@@ -76,6 +76,7 @@
 
   .correo-form {
     width: 100%;
+    gap: 0rem;
   }
 
   .contact-form {

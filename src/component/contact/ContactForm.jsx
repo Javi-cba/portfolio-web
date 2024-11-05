@@ -55,7 +55,7 @@ const ContactForm = () => {
             type="primary"
             icon={<MailOutlined />}
             onClick={handleSendEmail}
-            style={{ marginTop: '10px' }}
+            style={{ margin: '0.4rem' }}
           >
             Enviar correo
           </Button>

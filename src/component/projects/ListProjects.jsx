@@ -22,7 +22,7 @@ export default function ListProjects() {
           ]}
           urlProject="https://frontend-lake-rho.vercel.app/"
           urlRepo="https://github.com/Javi-cba/EComerce-MERN.git"
-          urlImg="https://mi-proyect1.s3.us-east-2.amazonaws.com/EComerce.jpeg"
+          urlImg="https://i.ibb.co/RTXQYyx/ecomerce.jpg"
         />
         <Project
           name="Taskify"
@@ -38,7 +38,7 @@ export default function ListProjects() {
           ]}
           urlProject="https://web-taskfy-abm.vercel.app"
           urlRepo="https://github.com/Javi-cba/abm-task-frontend.git"
-          urlImg="https://mi-proyect1.s3.us-east-2.amazonaws.com/taskify.jpeg"
+          urlImg="https://i.ibb.co/3fbrrZ7/task.jpg"
         />
         <Project
           name="Convert Docx to PDF"
@@ -53,7 +53,7 @@ export default function ListProjects() {
           ]}
           urlProject="https://convert-docs-word-pdf.vercel.app/home"
           urlRepo="https://github.com/Javi-cba/convert-docs-word_pdf.git"
-          urlImg="https://mi-proyect1.s3.us-east-2.amazonaws.com/convertPDF.jpeg"
+          urlImg="https://i.ibb.co/7Qp2bns/pdf.jpg"
         />
       </section>
     </div>
