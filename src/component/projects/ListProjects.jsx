@@ -1,60 +1,38 @@
+import { useEffect, useState } from 'react';
 import SubTittle from '../SubTittle';
 import Project from './Project';
+import { getProjects } from '../../services/gitHubServ';
 import './projects.css';
 
 export default function ListProjects() {
+  const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const resp = await getProjects();
+        setProjects(resp);
+      } catch (error) {
+        console.error(`Error Fetch getProjects: ${error}`);
+      }
+    };
+    fetchProjects();
+  }, []);
   return (
     <div className="projects-container">
       <SubTittle text="Proyectos" />
 
       <section className="list-projects">
-        <Project
-          name="Ecommerce"
-          description="Desarrollé una página web con el objetivo de mostrar mis habilidades en la creación de componentes reutilizables, diseño web y funcionalidades utilizando ReactJS. La aplicación cuenta con un catálogo de varias categorías, con un carrito de compras para confirmar el pedido y guardarlo en base de datos."
-          tecnology={[
-            'JavaScript',
-            'ReactJS',
-            'Flexbox',
-            'NodeJS',
-            'MongoDB',
-            'MVC',
-            'Microservices',
-          ]}
-          urlProject="https://frontend-lake-rho.vercel.app/"
-          urlRepo="https://github.com/Javi-cba/EComerce-MERN.git"
-          urlImg="https://i.ibb.co/RTXQYyx/ecomerce.jpg"
-        />
-        <Project
-          name="Taskify"
-          description="He desarrollado una aplicación web que incluye un sistema completo de gestión de tareas (CRUD), el cual permite a los usuarios crear, visualizar, modificar y eliminar sus propias tareas de manera eficiente. La autenticación de usuarios está gestionada a través de Auth0, lo que asegura un inicio de sesión seguro."
-          tecnology={[
-            'JavaScript',
-            'ReactJS',
-            'Auth0',
-            'Flexbox',
-            'NodeJS',
-            'MongoDB',
-            'MVC',
-          ]}
-          urlProject="https://web-taskfy-abm.vercel.app"
-          urlRepo="https://github.com/Javi-cba/abm-task-frontend.git"
-          urlImg="https://i.ibb.co/3fbrrZ7/task.jpg"
-        />
-        <Project
-          name="Convert Docx to PDF"
-          description="He creado una aplicación web que permite convertir archivos DOCX a PDF de forma rápida y sencilla. Los usuarios pueden cargar sus documentos DOCX, y la app los convierte en PDFs manteniendo el formato original, incluyendo imágenes y estilos."
-          tecnology={[
-            'HTML',
-            'CSS',
-            'JavaScript',
-            'ReactJS',
-            'Bootstrap',
-            'Axios',
-          ]}
-          urlProject="https://convert-docs-word-pdf.vercel.app/home"
-          urlRepo="https://github.com/Javi-cba/convert-docs-word_pdf.git"
-          urlImg="https://i.ibb.co/7Qp2bns/pdf.jpg"
-        />
+        {projects.map((item, index) => (
+          <Project
+            key={index}
+            name={item.name}
+            description={item.description}
+            tecnology={item.topics}
+            urlProject={item.homepage}
+            urlRepo={item.html_url}
+            urlImg={item.urlImg}
+          />
+        ))}
       </section>
     </div>
   );

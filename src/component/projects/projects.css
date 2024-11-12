@@ -9,7 +9,7 @@
 .list-projects {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
   justify-content: space-around;
   align-items: start;
   width: 100%;
@@ -78,15 +78,17 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-wrap: wrap;
   gap: 0.2rem;
+  margin: 0.5rem 0rem;
+
   width: 100%;
 }
 
 .tecnology {
-  font-size: 1rem;
+  font-size: 0.7rem;
   border-radius: 0.5rem;
   border: 1px solid #247032;
   background-color: #24703210;
   padding: 0.1rem 0.4rem;
-  margin: 0.5rem 0rem;
 }
