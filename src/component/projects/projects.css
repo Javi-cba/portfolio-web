@@ -113,7 +113,8 @@
 }
 
 .custom-modal .ant-modal-title {
-  color: white !important;
+  color: #8f8f8f !important;
+  font-weight: bold !important;
 }
 
 .custom-modal .ant-modal-close {
