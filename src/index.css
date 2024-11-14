@@ -32,21 +32,21 @@ body {
 }
 
 /* Estilo para el scrollbar*/
-html::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 12px !important;
 }
 
-html::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: transparent !important;
   border-radius: 6px !important;
 }
 
-html::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: #1d703294 !important;
   border-radius: 6px !important;
 }
 
-html::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: #1d7032b7 !important;
 }
 

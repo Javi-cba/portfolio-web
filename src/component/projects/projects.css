@@ -98,6 +98,14 @@
   background-color: #0528235e !important;
   backdrop-filter: blur(4px) !important;
   color: white !important;
+  width: 95vh !important;
+  height: 75vh;
+  overflow-y: scroll;
+  border: 2px solid #16461fad;
+}
+.custom-modal .ant-modal-content h2 {
+  color: #4abd5f !important;
+  font-size: 2rem !important;
 }
 
 .custom-modal .ant-modal-header,
@@ -113,7 +121,7 @@
 }
 
 .custom-modal .ant-modal-title {
-  color: #8f8f8f !important;
+  color: #c2c2c2 !important;
   font-weight: bold !important;
 }
 
