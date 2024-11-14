@@ -60,12 +60,13 @@ export function getProjects() {
             .filter(item => item.topics?.length > 0) // Solo los que tienen topics
             .map(async item => {
               // contenido del README.md
-              const readmeContent = await getReadmeContent(item.name);
+              let readmeContent = await getReadmeContent(item.name);
 
               // Extrae la URL de la imagen desde el README.md
-              const urlImg =
-                extractImageUrl(readmeContent) ||
-                'https://img.icons8.com/?size=100&id=j1UxMbqzPi7n&format=png&color=000000';
+              const urlImg = extractImageUrl(readmeContent);
+
+              // Remueve las imágenes usando una expresión regular
+              readmeContent = readmeContent.replace(/!\[.*?\]\(.*?\)/g, '');
 
               return {
                 ...item,
@@ -75,6 +76,7 @@ export function getProjects() {
                   ...item.topics.map(topic => topic.toUpperCase()),
                 ],
                 urlImg: urlImg, // La URL de la imagen externa
+                readme: readmeContent,
               };
             })
         );

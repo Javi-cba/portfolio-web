@@ -1,6 +1,12 @@
-import { Descriptions } from 'antd';
+import { useState } from 'react';
 import './projects.css';
-import { GithubOutlined, DesktopOutlined } from '@ant-design/icons';
+import {
+  GithubOutlined,
+  DesktopOutlined,
+  ReadOutlined,
+} from '@ant-design/icons';
+import Readme from './Readme';
+
 export default function Project({
   name,
   description,
@@ -8,9 +14,16 @@ export default function Project({
   tecnology,
   urlRepo,
   urlImg,
+  readme,
 }) {
+  const [openReadme, setOpenReadme] = useState(false);
+
   const redirect = url => {
     window.open(url, '_blank');
+  };
+
+  const handleReadme = () => {
+    setOpenReadme(true);
   };
 
   return (
@@ -30,12 +43,22 @@ export default function Project({
         </section>
       </section>
       <div className="redireccions">
+        <ReadOutlined className="icon" onClick={handleReadme} />
         <GithubOutlined className="icon" onClick={() => redirect(urlRepo)} />
         <DesktopOutlined
           className="icon"
           onClick={() => redirect(urlProject)}
         />
       </div>
+
+      {openReadme && (
+        <Readme
+          open={openReadme}
+          setOpen={setOpenReadme}
+          readme={readme}
+          repo={name}
+        />
+      )}
     </article>
   );
 }

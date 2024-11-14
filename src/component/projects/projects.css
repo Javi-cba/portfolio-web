@@ -92,3 +92,34 @@
   background-color: #24703210;
   padding: 0.1rem 0.4rem;
 }
+
+/* Estilos personalizados para el modal README*/
+.custom-modal .ant-modal-content {
+  background-color: #3f69477a !important;
+  backdrop-filter: blur(4px) !important;
+  color: white !important;
+}
+
+.custom-modal .ant-modal-header,
+.custom-modal .ant-modal-footer {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.custom-modal .ant-modal-header,
+.custom-modal .ant-modal-footer {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.custom-modal .ant-modal-title {
+  color: white !important;
+}
+
+.custom-modal .ant-modal-close {
+  color: #b3b3b3 !important;
+}
+
+.custom-modal .ant-modal-close:hover {
+  color: #6d0b0bdd !important;
+}

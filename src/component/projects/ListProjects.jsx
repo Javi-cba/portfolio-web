@@ -31,6 +31,7 @@ export default function ListProjects() {
             urlProject={item.homepage}
             urlRepo={item.html_url}
             urlImg={item.urlImg}
+            readme={item.readme}
           />
         ))}
       </section>
