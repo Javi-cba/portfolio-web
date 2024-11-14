@@ -26,11 +26,21 @@ async function getReadmeContent(repo) {
     const url = `${URL}/repos/${USER}/${repo}/contents/README.md`;
     const response = await axios.get(url, headers);
 
-    // README está codificado en base64, asi q lo decodificamos
+    // README está codificado en base64, decodificamos el contenido base64 a un ArrayBuffer
     const base64Content = response.data.content;
-    const readmeContent = atob(base64Content); // Decodifica el contenido base64
+    const binaryContent = atob(base64Content);
 
-    return readmeContent;
+    // Convierte el contenido binario a un ArrayBuffer
+    const byteArray = new Uint8Array(binaryContent.length);
+    for (let i = 0; i < binaryContent.length; i++) {
+      byteArray[i] = binaryContent.charCodeAt(i);
+    }
+
+    // Usa TextDecoder para que se interpreta como UTF-8
+    const textDecoder = new TextDecoder('utf-8');
+    const decodedText = textDecoder.decode(byteArray);
+
+    return decodedText;
   } catch (error) {
     console.error(`Error Fetch getReadmeContent: ${error}`);
     throw error;
