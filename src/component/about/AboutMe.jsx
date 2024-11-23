@@ -1,5 +1,5 @@
-import { Avatar } from 'antd';
-import './about.css';
+import { Avatar } from "antd";
+import "./about.css";
 
 export default function AboutMe() {
   return (
