@@ -10,8 +10,8 @@ export default function ListSkills() {
         <div className="stack-aside">
           <Reveal y={16}>
             <p className="stack-note">
-              Trabajo cómodo en todo el ciclo: modelar los datos, escribir la API,
-              construir la interfaz y dejarlo andando en producción.
+              Trabajo cómodo en todo el ciclo: modelar los datos, connstruir backend,
+              diseñar la interfaz y dejarlo funcional en producción.
             </p>
           </Reveal>
         </div>

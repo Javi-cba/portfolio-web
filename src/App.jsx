@@ -45,9 +45,7 @@ function App() {
 
         <section id="stack" className="section section--line">
           <div className="shell">
-            <SubTittle text="Stack" index="03" eyebrow="Herramientas">
-              Las tecnologías con las que trabajo todos los días, agrupadas por
-              dominio.
+            <SubTittle text="Stack" index="03" eyebrow="Herramientas">            
             </SubTittle>
           </div>
           <ListSkills />
