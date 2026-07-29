@@ -1,88 +1,240 @@
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+.contact-head {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.contact-eyebrow {
+  color: var(--accent);
+  display: block;
+  margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.contact-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-line {
+  --target-lh: 0.95;
+  font-size: clamp(2.5rem, 9vw, 8rem);
+  line-height: 0.95;
+}
+
+.contact-line--outline {
+  padding-left: clamp(0px, 6vw, 6rem);
+  color: transparent;
+  -webkit-text-stroke: 1.3px var(--ink);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+/* --- Email destacado --- */
+.contact-mail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.contact-mail-link {
+  position: relative;
+  font-size: var(--step-2);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.contact-mail-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.1em;
+  height: 1px;
+  background: var(--ink);
+  transform-origin: right center;
+  transition: transform var(--t-med) var(--ease-out);
+}
+
+.contact-mail-link:hover {
+  color: var(--accent);
+}
+
+.contact-mail-link:hover::after {
+  transform: scaleX(0);
+}
+
+.contact-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: var(--ink-3);
+  transition: color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.contact-copy:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+/* --- Redes --- */
+.contact-socials {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.contact-social {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  transition: padding-left var(--t-med) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+
+.contact-social:hover {
+  padding-left: 0.6rem;
+  color: var(--ink);
+}
+
+.contact-social-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink-3);
+}
+
+.contact-social-handle {
+  font-size: var(--step-0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-social-arrow {
+  flex: none;
+  transition: transform var(--t-med) var(--ease-out);
+}
+
+.contact-social:hover .contact-social-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ============================================================
+   FORMULARIO
+   ============================================================ */
+.contact-form-wrap {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  gap: 1rem;
-  text-align: start;
-  margin-top: 0.3rem;
-  padding: 10rem 1rem 1rem 1rem;
-  background: linear-gradient(to top, #103f1cc9, transparent);
-  backdrop-filter: blur(20px);
-}
-.contact-form h2 {
-  color: #888888 !important;
+  gap: 1.25rem;
 }
 
-.form-container {
+.field {
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  flex-direction: column;
   gap: 0.5rem;
-  flex-wrap: wrap;
 }
 
-.correo-form {
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: row;
-  gap: 0rem 1rem;
-  flex-wrap: wrap;
-  width: 86%;
+.field-label {
+  color: var(--ink-3);
 }
 
-.social-links {
-  display: flex;
-  width: 10rem;
-  align-items: start;
-  justify-content: start;
-  gap: 1rem;
+.field-input {
+  width: 100%;
+  padding: 0.85rem 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-size: var(--step-0);
+  transition: border-color var(--t-fast) var(--ease-out);
 }
 
-.input-area {
-  width: 75%;
-  max-height: 10rem !important;
-  min-height: 3.5rem !important;
-  border-radius: 8px;
-  color: #c9c9c9d3;
-  font-weight: bold;
-  border: 1px solid #1d7032b7;
-  background-color: #021227b6;
-  resize: none;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-.input-area::placeholder {
-  color: #c9c9c9d3;
-  font-weight: bold;
-  font-size: 1rem;
+.field-input::placeholder {
+  color: var(--ink-3);
 }
 
-.input-area:focus {
-  border-color: #1d7032;
-  background-color: transparent;
+.field-input:focus {
   outline: none;
+  border-bottom-color: var(--accent);
 }
 
-.input-area:hover {
-  border-color: #1d7032;
-  background-color: transparent;
-  outline: none;
+.field-textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.55;
 }
 
-@media (max-width: 765px) {
-  .input-area {
-    width: 100%;
+.contact-submit-wrap {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+}
+
+.contact-submit:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.contact-submit:disabled::after {
+  transform: translateY(101%);
+}
+
+.contact-note {
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 880px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
   }
 
-  .correo-form {
-    width: 100%;
-    gap: 0rem;
+  .contact-line--outline {
+    padding-left: 0;
+    -webkit-text-stroke: 1px var(--ink);
+  }
+}
+
+@media (max-width: 520px) {
+  .contact-social {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 0.2rem;
   }
 
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .contact-social-label {
+    grid-column: 1 / -1;
   }
 }

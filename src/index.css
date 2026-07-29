@@ -1,95 +1,251 @@
+@import 'lenis/dist/lenis.css';
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Tipografías */
+  --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif;
+  --font-sans: 'Inter Tight', Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #021227;
+  /* Escala tipográfica fluida */
+  --step--2: clamp(0.68rem, 0.66rem + 0.1vw, 0.75rem);
+  --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.9rem);
+  --step-0: clamp(0.95rem, 0.91rem + 0.2vw, 1.07rem);
+  --step-1: clamp(1.13rem, 1.04rem + 0.45vw, 1.4rem);
+  --step-2: clamp(1.45rem, 1.25rem + 1vw, 2rem);
+  --step-3: clamp(1.9rem, 1.5rem + 2vw, 3rem);
+  --step-4: clamp(2.5rem, 1.7rem + 4vw, 4.75rem);
+  --display: clamp(3.2rem, 0.6rem + 12.5vw, 12.5rem);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Layout */
+  --shell: 1440px;
+  --gutter: clamp(1.15rem, 4vw, 4.5rem);
+  --section-y: clamp(5rem, 10vw, 11rem);
+  --nav-h: 4.75rem;
+
+  /* Easings + duraciones */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --t-fast: 0.25s;
+  --t-med: 0.5s;
+  --t-slow: 0.9s;
 }
 
-* {
+/* --- Tema claro: papel editorial --- */
+:root,
+:root[data-theme='light'] {
+  --paper: #f4f2ed;
+  --paper-2: #eae7df;
+  --paper-3: #fffefb;
+  --ink: #14150f;
+  --ink-2: #56584d;
+  --ink-3: #8b8d81;
+  --line: rgba(20, 21, 15, 0.13);
+  --line-strong: rgba(20, 21, 15, 0.34);
+  --accent: #14624a;
+  --accent-ink: #f4f2ed;
+  --signal: #cf8f14;
+  --shadow: 0 1px 2px rgba(20, 21, 15, 0.05),
+    0 18px 40px -16px rgba(20, 21, 15, 0.22);
+  --img-filter: grayscale(1) contrast(1.04);
+}
+
+/* --- Tema oscuro: tinta --- */
+:root[data-theme='dark'] {
+  --paper: #0d0f0d;
+  --paper-2: #161916;
+  --paper-3: #1d211d;
+  --ink: #f0efe8;
+  --ink-2: #9d9f94;
+  --ink-3: #6d6f66;
+  --line: rgba(240, 239, 232, 0.14);
+  --line-strong: rgba(240, 239, 232, 0.4);
+  --accent: #5fcf9b;
+  --accent-ink: #0d0f0d;
+  --signal: #efb63f;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 20px 44px -16px rgba(0, 0, 0, 0.72);
+  --img-filter: grayscale(1) contrast(1.06) brightness(0.92);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 16px;
-}
-body {
-  padding: 0rem;
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
-/* Estilo para el scrollbar*/
+body {
+  min-height: 100%;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--t-med) var(--ease-out),
+    color var(--t-med) var(--ease-out);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* ============================================================
+   TIPOGRAFÍA BASE
+   ============================================================ */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.012em;
+  line-height: 0.86;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 48ch;
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   ACCESIBILIDAD
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 999;
+  padding: 0.6rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transform: translateY(-180%);
+  transition: transform var(--t-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
 *::-webkit-scrollbar {
-  width: 12px !important;
+  width: 10px;
+  height: 10px;
 }
 
 *::-webkit-scrollbar-track {
-  background: transparent !important;
-  border-radius: 6px !important;
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #1d703294 !important;
-  border-radius: 6px !important;
+  background: var(--line-strong);
+  border: 3px solid var(--paper);
+  border-radius: 99px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #1d7032b7 !important;
+  background: var(--ink-2);
 }
 
-.divLine-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-}
-
-.divLine {
-  width: 40%;
-  height: 2px;
-  background-color: #52e96d63 !important;
-  border-radius: 2rem;
-}
-
-.ant-btn {
-  color: #ffffff;
-  background-color: #02122700;
-  border-color: #52e96d63 !important;
-  border-radius: 1.5rem;
-  font-size: 1.2rem;
-}
-
-.ant-btn:hover {
-  color: #ffffff !important;
-  background-color: #52e96d63 !important;
-  border-color: #52e96d63 !important;
-}
-
-@media (max-width: 850px) {
-  html,
-  body {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 700px) {
-  html,
-  body {
-    font-size: 10px;
+/* ============================================================
+   MOTION PREFERENCES
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

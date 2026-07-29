@@ -1,0 +1,108 @@
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  background: var(--paper-2);
+}
+
+/* --- Wordmark gigante de fondo --- */
+.footer-wordmark-wrap {
+  overflow: hidden;
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  user-select: none;
+}
+
+/* Capa propia: el texto con contorno es caro de rasterizar y GSAP lo desplaza
+   con el scroll; así se pinta una vez y solo se recompone. */
+.footer-wordmark {
+  display: block;
+  width: max-content;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 13vw, 12rem);
+  line-height: 0.82;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  will-change: transform;
+}
+
+/* --- Datos --- */
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-label {
+  color: var(--ink-3);
+}
+
+.footer-value {
+  font-size: var(--step-0);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+  font-size: var(--step-0);
+}
+
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 99px;
+  color: var(--ink);
+  transition: background-color var(--t-med) var(--ease-out),
+    color var(--t-med) var(--ease-out), border-color var(--t-med) var(--ease-out);
+}
+
+.footer-top:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.footer-top svg {
+  transition: transform var(--t-med) var(--ease-out);
+}
+
+.footer-top:hover svg {
+  transform: translateY(-3px);
+}
+
+/* --- Legal --- */
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem 2rem;
+  padding-block: 1.35rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+}
+
+@media (max-width: 620px) {
+  .footer-top {
+    margin-left: 0;
+  }
+}

@@ -48,7 +48,7 @@ async function getReadmeContent(repo) {
 }
 
 function extractImageUrl(readmeContent) {
-  const regex = /!\[([^\]]*)\]\((https?:\/\/[^\)]+)\)/g; // Expresión regular para encontrar imágenes
+  const regex = /!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g; // Expresión regular para encontrar imágenes
   let match;
   const imageUrls = [];
 

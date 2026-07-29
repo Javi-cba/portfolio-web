@@ -1,34 +1,65 @@
-import React from 'react';
-import SubTittle from '../SubTittle';
+import Reveal from '../Reveal';
+import Marquee from '../Marquee';
+import { stack, techLogos } from '../../data/profile';
 import './skill.css';
-
-const skills = [
-  'https://i.ibb.co/k6cmZhb/node.png',
-  'https://i.ibb.co/VJBGFQX/react.png',
-  'https://i.ibb.co/3fbMpNg/sql.png',
-  'https://i.ibb.co/zmcqn87/vs.png',
-  'https://i.ibb.co/sbzwqJb/vsc.png',
-  'https://i.ibb.co/N6rqP4g/C.png',
-  'https://i.ibb.co/pLLj4sn/css.png',
-  'https://i.ibb.co/z5zS1LM/git.png',
-  'https://i.ibb.co/3CcWq4L/gitHub.png',
-  'https://i.ibb.co/yQxqwcC/html.png',
-  'https://i.ibb.co/TthrJyY/js.png',
-  'https://i.ibb.co/vxjGgZW/mongo.png',
-  'https://i.ibb.co/LpdTwfs/net.png',
-];
 
 export default function ListSkills() {
   return (
-    <div className="skills-container">
-      <SubTittle text="Habilidades" />
-      <ul className="list-skills">
-        {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
-          <li key={index}>
-            <img src={skill} alt={`Skill ${index}`} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="shell stack">
+        <div className="stack-aside">
+          <Reveal y={16}>
+            <p className="stack-note">
+              Trabajo cómodo en todo el ciclo: modelar los datos, escribir la API,
+              construir la interfaz y dejarlo andando en producción.
+            </p>
+          </Reveal>
+        </div>
+
+        <ul className="stack-list">
+          {stack.map((group, index) => (
+            <Reveal
+              as="li"
+              className="stack-group"
+              key={group.id}
+              y={22}
+              delay={index * 0.05}
+              amount={0.3}
+            >
+              <div className="stack-group-head">
+                <span className="mono stack-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="stack-label">{group.label}</h3>
+              </div>
+
+              <div className="stack-items">
+                {group.items.map(item => (
+                  <span className="stack-item" key={item}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+
+      <div className="logos">
+        <Marquee speed={1.8}>
+          {techLogos.map(logo => (
+            <span className="logo-item" key={logo.name} title={logo.name}>
+              <img
+                src={logo.src}
+                alt={logo.name}
+                loading="lazy"
+                decoding="async"
+              />
+              <span className="mono logo-name">{logo.name}</span>
+            </span>
+          ))}
+        </Marquee>
+      </div>
+    </>
   );
 }

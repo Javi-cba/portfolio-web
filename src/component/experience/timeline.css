@@ -1,0 +1,255 @@
+/* ============================================================
+   TRAYECTORIA
+   ============================================================ */
+.tl {
+  position: relative;
+}
+
+/* Riel vertical que se dibuja con el scroll */
+.tl-rail {
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background: var(--line);
+}
+
+.tl-rail-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: top center;
+}
+
+.tl-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 11rem) minmax(0, 1fr);
+  gap: 0 clamp(1.25rem, 3vw, 3rem);
+  padding-block: clamp(2rem, 4vw, 3.25rem);
+  border-top: 1px solid var(--line);
+}
+
+.tl-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+/* --- Marcador --- */
+.tl-marker {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 0.3rem;
+}
+
+.tl-dot {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+}
+
+.tl-dot.is-current {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* --- Período --- */
+.tl-period {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding-top: 0.15rem;
+  color: var(--ink-3);
+}
+
+.tl-now {
+  padding: 0.18rem 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 99px;
+  color: var(--accent);
+  font-size: 0.6rem;
+}
+
+/* --- Contenido --- */
+.tl-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tl-role {
+  font-size: var(--step-2);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tl-company {
+  margin-top: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+
+.tl-summary {
+  color: var(--ink-2);
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+.tl-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-width: 62ch;
+}
+
+.tl-highlights li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.tl-bullet {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  margin-top: 0.45em;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
+/* ============================================================
+   FORMACIÓN
+   ============================================================ */
+.edu {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.edu-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+  color: var(--ink-3);
+}
+
+.edu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding-block: 1.35rem;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left var(--t-med) var(--ease-out);
+}
+
+.edu-item:hover {
+  padding-left: 0.6rem;
+}
+
+.edu-title {
+  font-size: var(--step-1);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.edu-school {
+  margin-top: 0.2rem;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+.edu-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--ink-3);
+}
+
+.edu-note {
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: var(--accent);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 820px) {
+  /*
+   * Con dos columnas hay que declarar las áreas: los tres hijos (marcador,
+   * período y contenido) se acomodaban en flujo automático y el contenido
+   * terminaba dentro de la columna angosta del marcador.
+   */
+  .tl-item {
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    grid-template-areas:
+      'marker period'
+      'content content';
+    gap: 0.9rem 0.85rem;
+  }
+
+  .tl-marker {
+    grid-area: marker;
+    padding-top: 0.15rem;
+  }
+
+  .tl-period {
+    grid-area: period;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0;
+  }
+
+  .tl-content {
+    grid-area: content;
+    padding-left: 2.35rem;
+  }
+
+  .tl-rail {
+    left: 3px;
+  }
+
+  .tl-role {
+    font-size: var(--step-1);
+  }
+}
+
+@media (max-width: 520px) {
+  /* Indentación mínima para que el riel vertical no cruce el texto */
+  .tl-content {
+    padding-left: 1.6rem;
+  }
+
+  .edu-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

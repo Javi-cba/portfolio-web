@@ -1,68 +1,157 @@
-import React, { useState } from 'react';
-import { Input, Button } from 'antd';
-import {
-  MailOutlined,
-  GithubOutlined,
-  LinkedinOutlined,
-} from '@ant-design/icons';
+import { useState } from 'react';
+import { ArrowUpRight, Mail, Send } from 'lucide-react';
+import Reveal, { AnimatedText } from '../Reveal';
+import Magnetic from '../Magnetic';
+import { GithubIcon, LinkedinIcon } from '../icons';
+import { profile } from '../../data/profile';
 import './contact.css';
-import { redirect } from 'react-router-dom';
 
-const ContactForm = () => {
-  const [emailBody, setEmailBody] = useState('');
+const SOCIAL_ICONS = {
+  GitHub: GithubIcon,
+  LinkedIn: LinkedinIcon,
+  Email: props => <Mail size={props.size} strokeWidth={1.7} />,
+};
 
-  const handleEmailChange = e => {
-    setEmailBody(e.target.value);
-  };
+export default function ContactForm() {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSendEmail = () => {
-    const mailtoLink = `mailto:cordobajava@gmail.com?subject=Te%contatamos%desde%tu%portafolio&body=${encodeURIComponent(
-      emailBody
-    )}`;
-    window.location.href = mailtoLink;
+  const canSend = message.trim().length > 0;
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (!canSend) return;
+
+    const subject = name.trim()
+      ? `Contacto desde tu portfolio — ${name.trim()}`
+      : 'Contacto desde tu portfolio';
+
+    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(message)}`;
   };
 
   return (
-    <div className="contact-form">
-      <h2>Contáctame</h2>
+    <div className="shell contact">
+      <div className="contact-head">
+        <Reveal y={14} duration={0.7}>
+          <span className="mono contact-eyebrow">05 — Contacto</span>
+        </Reveal>
 
-      <section className="form-container">
-        <article className="social-links">
-          <GithubOutlined
-            className="icon"
-            onClick={() => {
-              window.location.href = 'https://github.com/javi-cba';
-            }}
+        <h2 className="contact-title">
+          <AnimatedText
+            as="span"
+            text="Construyamos"
+            className="display contact-line"
+            stagger={0.03}
           />
+          <AnimatedText
+            as="span"
+            text="algo juntos"
+            className="display contact-line contact-line--outline"
+            stagger={0.03}
+            delay={0.12}
+          />
+        </h2>
+      </div>
 
-          <LinkedinOutlined
-            className="icon"
-            onClick={() => {
-              window.location.href = 'https://www.linkedin.com/in/javi-cba';
-            }}
-          />
-        </article>
+      <div className="contact-grid">
+        <div className="contact-left">
+          <Reveal y={20}>
+            <p className="lede">
+              ¿Tenés un proyecto, una búsqueda abierta o una idea para validar?
+              Escribime y lo charlamos.
+            </p>
+          </Reveal>
 
-        <article className="correo-form">
-          <Input.TextArea
-            rows={4}
-            placeholder="Envíame un correo..."
-            value={emailBody}
-            className="input-area"
-            onChange={handleEmailChange}
-          />
-          <Button
-            type="primary"
-            icon={<MailOutlined />}
-            onClick={handleSendEmail}
-            style={{ margin: '0.4rem' }}
-          >
-            Enviar correo
-          </Button>
-        </article>
-      </section>
+
+          <ul className="contact-socials">
+            {profile.socials.map((social, index) => {
+              const Icon = SOCIAL_ICONS[social.label];
+
+              return (
+                <Reveal
+                  as="li"
+                  key={social.label}
+                  y={16}
+                  delay={0.12 + index * 0.06}
+                >
+                  <a
+                    href={social.url}
+                    target={social.label === 'Email' ? undefined : '_blank'}
+                    rel="noreferrer"
+                    className="contact-social"
+                    data-cursor="hover"
+                  >
+                    <span className="contact-social-label mono">
+                      {Icon && <Icon size={14} />}
+                      {social.label}
+                    </span>
+                    <span className="contact-social-handle">
+                      {social.handle}
+                    </span>
+                    <ArrowUpRight
+                      size={16}
+                      strokeWidth={1.7}
+                      className="contact-social-arrow"
+                    />
+                  </a>
+                </Reveal>
+              );
+            })}
+          </ul>
+        </div>
+
+        <Reveal className="contact-form-wrap" y={24} delay={0.1}>
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="field">
+              <label className="mono field-label" htmlFor="contact-name">
+                Tu nombre
+              </label>
+              <input
+                id="contact-name"
+                type="text"
+                className="field-input"
+                placeholder="Cómo te llamás"
+                value={name}
+                onChange={event => setName(event.target.value)}
+                autoComplete="name"
+              />
+            </div>
+
+            <div className="field">
+              <label className="mono field-label" htmlFor="contact-message">
+                Mensaje
+              </label>
+              <textarea
+                id="contact-message"
+                className="field-input field-textarea"
+                rows={5}
+                placeholder="Contame en qué estás pensando…"
+                value={message}
+                onChange={event => setMessage(event.target.value)}
+                required
+              />
+            </div>
+
+            <Magnetic strength={0.15} className="contact-submit-wrap">
+              <button
+                type="submit"
+                className="btn btn--solid btn--lg contact-submit"
+                disabled={!canSend}
+                data-cursor="hover"
+              >
+                <Send size={15} strokeWidth={1.8} />
+                Enviar mensaje
+              </button>
+            </Magnetic>
+
+            <p className="mono contact-note">
+              Se abre tu cliente de correo con el mensaje listo para enviar.
+            </p>
+          </form>
+        </Reveal>
+      </div>
     </div>
   );
-};
-
-export default ContactForm;
+}

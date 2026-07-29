@@ -1,36 +1,165 @@
-.skills-container {
+/* ============================================================
+   STACK TÉCNICO
+   ============================================================ */
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.stack-aside {
+  position: sticky;
+  top: calc(var(--nav-h) + 3rem);
+}
+
+.stack-note {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-2);
+  max-width: 32ch;
+  text-wrap: pretty;
+}
+
+.stack-list {
   display: flex;
-  overflow: hidden;
-  padding: 8rem 0rem;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 }
 
-.list-skills {
+.stack-group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+  gap: 0.75rem clamp(1.5rem, 3vw, 3rem);
+  padding-block: clamp(1.15rem, 2.2vw, 1.6rem);
+  border-top: 1px solid var(--line);
+  transition: background-color var(--t-med) var(--ease-out);
+}
+
+.stack-group:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.stack-group-head {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  align-items: baseline;
+  gap: 0.85rem;
+}
+
+.stack-index {
+  color: var(--ink-3);
+  flex: none;
+}
+
+.stack-label {
+  font-size: var(--step-1);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.stack-group:hover .stack-label {
+  color: var(--accent);
+}
+
+.stack-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.15rem;
+  align-content: flex-start;
+}
+
+.stack-item {
+  position: relative;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.stack-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-med) var(--ease-out);
+}
+
+.stack-item:hover {
+  color: var(--ink);
+}
+
+.stack-item:hover::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   TICKER DE LOGOS
+   ============================================================ */
+.logos {
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  border-block: 1px solid var(--line);
+}
+
+.logo-item {
+  display: inline-flex;
   align-items: center;
-  width: 100%;
-  gap: 3rem;
-  animation: slide 20s linear infinite;
+  gap: 0.7rem;
+  padding-inline: clamp(1.25rem, 3vw, 2.25rem);
+  border-right: 1px solid var(--line);
 }
 
-.list-skills li {
-  list-style: none;
+/*
+ * Atenuado por opacidad y no por `filter: grayscale()`: el ticker duplica los
+ * logos varias veces y cada imagen filtrada se rasterizaba dentro de una capa
+ * enorme en movimiento — era el mayor costo de render de la página.
+ */
+.logo-item img {
+  width: 1.7rem;
+  height: 1.7rem;
+  object-fit: contain;
+  opacity: 0.5;
+  transition: opacity var(--t-med) var(--ease-out),
+    transform var(--t-med) var(--ease-out);
 }
 
-.list-skills img {
-  width: 2rem;
-  height: 2rem;
+.logo-item:hover img {
+  opacity: 1;
+  transform: scale(1.12);
 }
 
-@keyframes slide {
-  0% {
-    transform: translateX(0);
+.logo-name {
+  color: var(--ink-3);
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.logo-item:hover .logo-name {
+  color: var(--ink);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .stack {
+    grid-template-columns: 1fr;
   }
-  100% {
-    transform: translateX(-50%);
+
+  .stack-aside {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .stack-group {
+    grid-template-columns: 1fr;
+  }
+
+  .logo-name {
+    display: none;
   }
 }

@@ -1,18 +1,364 @@
-/*ESTILOS GENERALES*/
-h3 {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 1.5em;
-  color: #247032;
-  margin: 0;
+/* ============================================================
+   LAYOUT / SHELL
+   ============================================================ */
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
-h1 {
-  font-size: 3em;
-  margin: 0;
+.section {
+  position: relative;
+  padding-block: var(--section-y);
 }
 
-h2 {
-  font-size: 2rem;
-  margin: 0;
-  color: #247032;
+.section--tight {
+  padding-block: clamp(3rem, 6vw, 6rem);
+}
+
+.section--line {
+  border-top: 1px solid var(--line);
+}
+
+.rule {
+  height: 1px;
+  width: 100%;
+  background: var(--line);
+  border: 0;
+}
+
+.rule--dashed {
+  height: 0;
+  border-top: 1px dashed var(--line-strong);
+  background: none;
+}
+
+/* ============================================================
+   ENCABEZADO DE SECCIÓN
+   ============================================================ */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.1rem, 2vw, 1.9rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.section-head-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.section-index {
+  color: var(--accent);
+  flex: none;
+}
+
+.section-rule {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--line-strong);
+  transform-origin: left center;
+}
+
+.section-eyebrow {
+  color: var(--ink-3);
+  flex: none;
+}
+
+.section-title {
+  --target-lh: 0.95;
+  font-size: var(--step-4);
+  line-height: 0.95;
+  max-width: 20ch;
+}
+
+.section-lede {
+  max-width: 54ch;
+}
+
+/* ============================================================
+   PRIMITIVAS DE TEXTO ANIMADO
+   ============================================================ */
+.anim-text {
+  display: block;
+}
+
+.anim-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.anim-word + .anim-word {
+  margin-left: 0.24em;
+}
+
+/*
+ * Anton tiene un ink ascent de 1.101em y un font box de 1.51em: con
+ * line-height ajustado, cualquier máscara con overflow:hidden le come los
+ * glifos (y las tildes de CÓRDOBA). Por eso la máscara usa un line-height
+ * holgado (--mask-lh) y recupera el interlineado real con márgenes negativos:
+ * cada bloque declara el interlineado que quiere en --target-lh.
+ */
+.anim-mask,
+.anim-line-mask {
+  --mask-lh: 1.4;
+  --target-lh: 1.1;
+  overflow: hidden;
+  line-height: var(--mask-lh);
+  margin-block: calc((var(--target-lh) - var(--mask-lh)) * 0.5em);
+}
+
+.anim-mask {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.anim-line-mask {
+  display: block;
+}
+
+/*
+ * Sin will-change acá a propósito: son decenas de letras y cada una se
+ * convertía en una capa de composición permanente. Motion promociona el
+ * elemento mientras la animación corre y lo libera al terminar.
+ */
+.anim-char,
+.anim-line {
+  display: inline-block;
+  line-height: var(--mask-lh);
+}
+
+.anim-line {
+  display: block;
+}
+
+/* ============================================================
+   TICKER / MARQUEE
+   ============================================================ */
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.marquee-track {
+  display: flex;
+  flex: none;
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+/* ============================================================
+   BOTONES / LINKS
+   ============================================================ */
+.btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 99px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  background: transparent;
+  transition: color var(--t-med) var(--ease-out),
+    border-color var(--t-med) var(--ease-out);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink);
+  transform: translateY(101%);
+  transition: transform var(--t-med) var(--ease-in-out);
+}
+
+.btn:hover {
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.btn:hover::after {
+  transform: translateY(0);
+}
+
+.btn svg {
+  transition: transform var(--t-med) var(--ease-out);
+}
+
+.btn:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.btn--solid {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn--solid::after {
+  background: var(--accent);
+}
+
+.btn--solid:hover {
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+.btn--lg {
+  padding: 1.05rem 1.9rem;
+  font-size: var(--step--1);
+}
+
+/* Botón circular tipo sello */
+.btn-circle {
+  display: grid;
+  place-items: center;
+  width: 8.5rem;
+  height: 8.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  transition: background-color var(--t-med) var(--ease-out),
+    color var(--t-med) var(--ease-out), border-color var(--t-med) var(--ease-out);
+}
+
+.btn-circle:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* Subrayado que barre de izquierda a derecha */
+.link-sweep {
+  position: relative;
+  display: inline-block;
+}
+
+.link-sweep::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.1em;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-med) var(--ease-out);
+}
+
+.link-sweep:hover::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   CHIPS DE TECNOLOGÍA
+   ============================================================ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.34rem 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-2);
+  background: var(--paper-2);
+  white-space: nowrap;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+/* ============================================================
+   CURSOR PERSONALIZADO
+   ============================================================ */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-left: -13px;
+  margin-top: -13px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  filter: invert(1);
+}
+
+.cursor-ring[data-variant='label'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  mix-blend-mode: normal;
+  filter: none;
+}
+
+.cursor-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+  white-space: nowrap;
+}
+
+/* El cursor no aplica en touch ni con movimiento reducido */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* ============================================================
+   WORDMARK DE FONDO
+   ============================================================ */
+.wordmark {
+  position: absolute;
+  left: 0;
+  width: max-content;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.8;
+  font-size: clamp(5rem, 20vw, 20rem);
+  color: var(--ink);
+  opacity: 0.045;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
 }

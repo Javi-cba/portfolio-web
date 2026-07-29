@@ -1,18 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link
       rel="icon"
       href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACXklEQVR4nO2Yz0/TYBjH+yd062g57zdb60GzcNCEkwn8G4IEzp0GSCB0mZOAWxMuQjxISDjAQSCBG9FED45wcipLNAYi8YJsBKuJxmSPeV4dEbBrO+z6ou83+Z7ep32/n7fv2+4ZxzExMTH9ExILSk7UlW+SrkAj/6yR73C0SbQR/hiioHzlaJNkM3zdroZp16Ip30hkj08Ha7waBE+dDtZ8w+EPfi1+3XZ4Ph3yPrh6GiRUC4zGr1gCkJX3Oqz6Z/uHI+8tAajYNqr5drIG8Dqk2tgMgP8fnkAy0wmrm/NgVMrEa1sLkMp1XQyAZKYTqvslAGP3hA8/viRj1AOsbs6fCV/3cnGOfgCjUjYF+HSwfbEBjg5e0w+wtrVgCvCo+JB+gFSuixzY0+Er+yVIaK04xLfONwEa3zZ4YHHPo3Hl/0Z4Pm0DQNBi55/IJQtazBqAdEyTSQhkO0AYj4F/NAq+oXDLw/qGwmRuzIBZMJOtRqhhK5iXQZxIkBsGxmMgELgQ/lY/njgydhnurWeh9HYDvlTLxC/ebMDUepaMnQh6OwT+kQgIY1EQMnFou9sB4pQMUkFuvpNz2hr+atTJCvUu9YNRNX+N4tiNxZukFq+RmrArAOi+lUGoGTum4evGmt6VgabmkNwCSM5ca7jyZ77I1W1I3L9KD4D+bNJ2+LrzTyfoAXi1+8QxQGnnMT0Anw/tb5/fD7REC8D3o3eOAfAaiRaAB8VpRxBYO/t8mh6AVppjADp7AuDqFhIL8p7XqyyZWNQV6/9G23WlBwtpDN+Wv9RtCcDExMTExDnQDxzyEhZHZ9IvAAAAAElFTkSuQmCC"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Javier Córdoba — Desarrollador de Software Full-Stack. React, React Native, Node.js, ASP.NET, SQL y MongoDB. Proyectos, stack y contacto."
+    />
+    <meta name="author" content="Javier Córdoba" />
+    <meta name="theme-color" content="#f4f2ed" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Javier Córdoba — Desarrollador de Software"
+    />
+    <meta
+      property="og:description"
+      content="Desarrollador Full-Stack. React, Node.js, ASP.NET, SQL y MongoDB."
+    />
+    <meta property="og:image" content="https://i.ibb.co/W3wYp01/profile.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:ital,wght@0,300..800;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Javier Córdoba Portfolio</title>
+    <title>Javier Córdoba — Desarrollador de Software</title>
+
+    <script>
+      // Aplica el tema antes del primer paint para evitar el flash de color.
+      (function () {
+        try {
+          var saved = localStorage.getItem('jc-theme');
+          var prefersDark =
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.dataset.theme =
+            saved || (prefersDark ? 'dark' : 'light');
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
