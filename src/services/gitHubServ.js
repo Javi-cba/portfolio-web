@@ -60,6 +60,27 @@ function extractImageUrl(readmeContent) {
   return imageUrls.length > 0 ? imageUrls[0] : null; // Devuelve URL de imagen encontrada
 }
 
+// Los topics `order-N` del repo son metadata de orden, no tecnologías: se leen
+// para ordenar el listado y se sacan de los tags que ve el usuario.
+const ORDER_TOPIC = /^order-(\d+)$/i;
+
+function readOrder(topics) {
+  for (const topic of topics) {
+    const match = ORDER_TOPIC.exec(topic);
+    if (match) return Number(match[1]);
+  }
+  return Number.POSITIVE_INFINITY;
+}
+
+/** Topics visibles: sin `order-N`, en mayúsculas, sin guiones y sin repetidos. */
+function buildTags(language, topics) {
+  const tags = [language, ...topics.filter(topic => !ORDER_TOPIC.test(topic))]
+    .filter(Boolean)
+    .map(topic => topic.replace(/-/g, ' ').toUpperCase().trim());
+
+  return [...new Set(tags)];
+}
+
 export function getProjects() {
   try {
     const resp = axios
@@ -67,8 +88,10 @@ export function getProjects() {
       .then(async res => {
         const resp = await Promise.all(
           Object.values(res.data)
-            .filter(item => item.topics?.length > 0) // Solo los que tienen topics
-            .map(async item => {
+            .map(item => ({ item, topics: item.topics ?? [] }))
+            // Solo los que tienen topics reales (`order-N` no cuenta como topic)
+            .filter(({ topics }) => topics.some(topic => !ORDER_TOPIC.test(topic)))
+            .map(async ({ item, topics }) => {
               // contenido del README.md
               let readmeContent = await getReadmeContent(item.name);
 
@@ -81,17 +104,19 @@ export function getProjects() {
               return {
                 ...item,
                 name: item.name.replace(/-/g, ' '), // Reemplaza los guiones por espacios
-                topics: [
-                  item.language?.toUpperCase(), // Agrega el lenguaje
-                  ...item.topics.map(topic => topic.toUpperCase()),
-                ],
+                topics: buildTags(item.language, topics),
+                order: readOrder(topics),
                 urlImg: urlImg, // La URL de la imagen externa
                 readme: readmeContent,
               };
             })
         );
 
-        return resp;
+        // Orden explícito desde GitHub; los repos sin `order-N` van al final
+        // manteniendo el orden que devolvió la API.
+        return resp.sort((a, b) =>
+          a.order === b.order ? 0 : a.order - b.order
+        );
       });
     return resp;
   } catch (error) {
