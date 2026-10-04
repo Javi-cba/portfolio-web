@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://main.d3daopq1z2wvo3.amplifyapp.com/$1",
+      "permanent": false
+    }
+  ]
+}
