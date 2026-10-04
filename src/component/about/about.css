@@ -138,6 +138,8 @@
   align-self: start;
   height: 0;
   display: flex;
+  /* Sin esto el flex estira el retrato al alto 0 del contenedor */
+  align-items: flex-start;
   justify-content: flex-end;
   transform: translateY(clamp(1.5rem, 6vh, 4rem));
 }
@@ -413,7 +415,7 @@
   .hero-visual {
     align-self: center;
     height: auto;
-    transform: none;
+    transform: translateY(-1rem);
   }
 
   .hero-portrait {
