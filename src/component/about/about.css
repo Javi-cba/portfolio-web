@@ -3,7 +3,9 @@
    ============================================================ */
 .hero {
   position: relative;
-  padding-top: calc(var(--nav-h) + clamp(2.5rem, 8vh, 6rem));
+  /* Poco aire arriba: al abrir la web nombre, intro y botones tienen que
+     entrar en la primera pantalla a zoom 100%. */
+  padding-top: calc(var(--nav-h) + clamp(0.75rem, 3vh, 2.5rem));
   padding-bottom: 0;
   overflow: hidden;
 }
@@ -39,7 +41,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: end;
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: clamp(1.25rem, 4vh, 3.5rem);
 }
 
 .hero-title {
@@ -50,7 +52,9 @@
 .hero-line {
   --target-lh: 0.95;
   display: block;
-  font-size: var(--display);
+  /* Acotado también por el alto del viewport, así en pantallas apaisadas
+     bajas el nombre no empuja la intro fuera de la primera pantalla. */
+  font-size: min(var(--display), 21vh);
   line-height: 0.95;
   color: var(--ink);
 }
@@ -124,17 +128,24 @@
 }
 
 /* --- Retrato --- */
-/* Baja el retrato respecto de la base del apellido: alineado exacto quedaba
-   demasiado arriba, este desfase le da aire a la composición. */
+/*
+ * El retrato arranca un poco debajo del borde superior del nombre y cuelga
+ * hacia la intro. Con `height: 0` no aporta alto a la fila: si lo hiciera,
+ * la foto (más alta que el nombre) empujaría la intro y los botones fuera de
+ * la primera pantalla.
+ */
 .hero-visual {
+  align-self: start;
+  height: 0;
   display: flex;
   justify-content: flex-end;
-  transform: translateY(clamp(2.5rem, 9vw, 8.75rem));
+  transform: translateY(clamp(1.5rem, 6vh, 4rem));
 }
 
 .hero-portrait {
   position: relative;
-  width: clamp(13rem, 26vw, 24rem);
+  /* Acotado por el alto (4:5 → 48vh de ancho = 60vh de alto) */
+  width: min(clamp(13rem, 26vw, 24rem), 48vh);
   aspect-ratio: 4 / 5;
 }
 
@@ -400,6 +411,8 @@
   }
 
   .hero-visual {
+    align-self: center;
+    height: auto;
     transform: none;
   }
 

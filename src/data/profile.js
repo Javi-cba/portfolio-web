@@ -154,7 +154,7 @@ export const stack = [
   {
     id: 'protocols',
     label: 'Protocolos',
-    items: ['HTTP', 'WebSocket', 'gRPC', 'MQTT'],
+    items: ['HTTP', 'WebSocket', 'gRPC', 'MQTT', 'MCP'],
   },
 ];
 
