@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#2a2a25"/>
+      <stop offset="1" stop-color="#0f0f0d"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="55%" r="50%">
+      <stop offset="0" stop-color="#c8ff3d" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#c8ff3d" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#c8ff3d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2=".3" y2="1">
+      <stop offset="0" stop-color="#f6d2b0"/>
+      <stop offset="1" stop-color="#d4946a"/>
+    </linearGradient>
+    <radialGradient id="skinHi" cx="35%" cy="28%" r="45%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b3530"/>
+      <stop offset="1" stop-color="#16120f"/>
+    </linearGradient>
+    <linearGradient id="hoodie" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4b4b58"/>
+      <stop offset="1" stop-color="#1c1c24"/>
+    </linearGradient>
+    <linearGradient id="phones" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8ff8a"/>
+      <stop offset="1" stop-color="#8fc21a"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1f1ee"/>
+      <stop offset=".5" stop-color="#c9c9c4"/>
+      <stop offset="1" stop-color="#8e8e89"/>
+    </linearGradient>
+    <linearGradient id="lidEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d6d68"/>
+      <stop offset="1" stop-color="#3c3c38"/>
+    </linearGradient>
+    <linearGradient id="deskTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6dccb"/>
+      <stop offset="1" stop-color="#c7b89f"/>
+    </linearGradient>
+    <linearGradient id="deskFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9c8b70"/>
+      <stop offset="1" stop-color="#6e604b"/>
+    </linearGradient>
+    <linearGradient id="mug" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff8a4c"/>
+      <stop offset=".6" stop-color="#ff6a2b"/>
+      <stop offset="1" stop-color="#c94812"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a3a33"/>
+      <stop offset="1" stop-color="#1b1b17"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+    <filter id="neon" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="tile"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#tile)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <!-- subtle grid -->
+    <g stroke="#ffffff" stroke-opacity=".04" stroke-width="1">
+      <path d="M0 64H512M0 128H512M0 192H512M0 256H512M0 320H512M0 384H512M0 448H512M64 0V512M128 0V512M192 0V512M256 0V512M320 0V512M384 0V512M448 0V512"/>
+    </g>
+    <circle cx="256" cy="280" r="230" fill="url(#glow)"/>
+
+    <!-- floating chips -->
+    <g filter="url(#soft)">
+      <g transform="translate(70 92) rotate(-12)">
+        <rect width="78" height="56" rx="14" fill="url(#chip)" stroke="#c8ff3d" stroke-opacity=".35" stroke-width="2"/>
+        <text x="39" y="38" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-weight="700" font-size="26" fill="#c8ff3d">{ }</text>
+      </g>
+      <g transform="translate(372 78) rotate(10)">
+        <rect width="72" height="52" rx="14" fill="url(#chip)" stroke="#ff6a2b" stroke-opacity=".45" stroke-width="2"/>
+        <text x="36" y="35" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-weight="700" font-size="22" fill="#ff8a4c">&lt;/&gt;</text>
+      </g>
+      <g transform="translate(398 230) rotate(-8)">
+        <rect width="54" height="42" rx="12" fill="url(#chip)" stroke="#ffffff" stroke-opacity=".18" stroke-width="2"/>
+        <text x="27" y="29" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-weight="700" font-size="20" fill="#f4f2ed">$_</text>
+      </g>
+    </g>
+
+    <!-- body / hoodie -->
+    <g filter="url(#soft)">
+      <path d="M118 470 C118 382 170 338 256 338 C342 338 394 382 394 470 Z" fill="url(#hoodie)"/>
+      <path d="M200 344 C214 372 298 372 312 344 C292 336 220 336 200 344Z" fill="#2a2a33"/>
+      <path d="M232 360 L226 410 M280 360 L286 410" stroke="#c8ff3d" stroke-width="5" stroke-linecap="round"/>
+      <path d="M150 400 C170 372 200 358 220 352" stroke="#fff" stroke-opacity=".12" stroke-width="8" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- neck -->
+    <path d="M232 310 h48 v36 c-14 10 -34 10 -48 0z" fill="#c98a62"/>
+
+    <!-- head -->
+    <g filter="url(#soft)">
+      <ellipse cx="256" cy="240" rx="78" ry="84" fill="url(#skin)"/>
+      <ellipse cx="256" cy="240" rx="78" ry="84" fill="url(#skinHi)"/>
+      <!-- ears -->
+      <ellipse cx="178" cy="250" rx="13" ry="18" fill="#d99c74"/>
+      <ellipse cx="334" cy="250" rx="13" ry="18" fill="#c98a62"/>
+      <!-- hair -->
+      <path d="M176 240 C166 160 218 132 262 136 C320 140 350 186 336 240 C330 218 322 206 310 198 C296 216 266 218 246 204 C230 216 206 216 194 204 C186 214 180 226 176 240Z" fill="url(#hair)"/>
+      <path d="M220 166 C244 154 280 154 304 168" stroke="#fff" stroke-opacity=".18" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- glasses -->
+    <g>
+      <rect x="198" y="228" width="50" height="38" rx="12" fill="#c8ff3d" fill-opacity=".18" stroke="#16120f" stroke-width="6"/>
+      <rect x="264" y="228" width="50" height="38" rx="12" fill="#c8ff3d" fill-opacity=".18" stroke="#16120f" stroke-width="6"/>
+      <path d="M248 244 h16" stroke="#16120f" stroke-width="6"/>
+      <path d="M206 238 l14 -4 M272 238 l14 -4" stroke="#fff" stroke-opacity=".8" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="226" cy="250" r="5" fill="#16120f"/>
+      <circle cx="290" cy="250" r="5" fill="#16120f"/>
+    </g>
+    <!-- smile -->
+    <path d="M238 290 C248 300 266 300 276 290" stroke="#8a4b2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- screen light on face -->
+    <ellipse cx="256" cy="300" rx="70" ry="28" fill="#c8ff3d" opacity=".12"/>
+
+    <!-- headphones -->
+    <g filter="url(#soft)">
+      <path d="M170 248 C162 150 350 150 342 248" stroke="#1c1c22" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <path d="M176 230 C176 170 336 170 336 230" stroke="#fff" stroke-opacity=".12" stroke-width="4" fill="none"/>
+      <rect x="152" y="222" width="34" height="62" rx="16" fill="url(#phones)"/>
+      <rect x="326" y="222" width="34" height="62" rx="16" fill="url(#phones)"/>
+      <rect x="158" y="230" width="8" height="40" rx="4" fill="#fff" fill-opacity=".45"/>
+    </g>
+
+    <!-- desk -->
+    <path d="M0 440 L512 440 L512 512 L0 512Z" fill="url(#deskFront)"/>
+    <path d="M30 410 L482 410 L512 440 L0 440Z" fill="url(#deskTop)"/>
+
+    <!-- laptop -->
+    <g filter="url(#soft)">
+      <path d="M150 300 Q150 288 162 288 L350 288 Q362 288 362 300 L372 412 L140 412Z" fill="url(#lid)"/>
+      <path d="M150 300 Q150 288 162 288 L350 288 Q362 288 362 300" stroke="#fff" stroke-opacity=".7" stroke-width="3" fill="none"/>
+      <path d="M118 412 L394 412 L404 428 Q404 434 396 434 L116 434 Q108 434 108 428Z" fill="url(#lidEdge)"/>
+      <path d="M124 414 L388 414" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+      <!-- logo -->
+      <g filter="url(#neon)">
+        <text x="256" y="368" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-weight="700" font-size="44" fill="#9fd61f">&lt;/&gt;</text>
+      </g>
+      <path d="M170 300 L214 300 L190 400 L160 400Z" fill="#fff" fill-opacity=".18"/>
+    </g>
+
+    <!-- mug -->
+    <g filter="url(#soft)">
+      <path d="M418 378 h48 v40 q0 14 -14 14 h-20 q-14 0 -14 -14z" fill="url(#mug)"/>
+      <ellipse cx="442" cy="378" rx="24" ry="7" fill="#3a1f10"/>
+      <path d="M466 388 q18 0 18 14 q0 14 -18 14" stroke="#c94812" stroke-width="7" fill="none"/>
+      <path d="M426 386 v30" stroke="#fff" stroke-opacity=".4" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g stroke="#f4f2ed" stroke-opacity=".5" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M434 362 q-8 -12 0 -24 q8 -12 0 -24"/>
+      <path d="M452 360 q-8 -10 0 -20 q8 -10 0 -20"/>
+    </g>
+
+    <!-- plant -->
+    <g filter="url(#soft)">
+      <path d="M44 390 C30 350 50 330 62 318 C66 344 66 366 60 390Z" fill="#5fae3a"/>
+      <path d="M62 390 C70 352 96 340 108 336 C100 362 88 380 74 392Z" fill="#7ccc45"/>
+      <path d="M40 386 h56 l-6 38 q-2 8 -10 8 h-24 q-8 0 -10 -8z" fill="#f4f2ed"/>
+      <path d="M40 386 h56 v8 h-56z" fill="#d8d3c8"/>
+    </g>
+  </g>
+</svg>

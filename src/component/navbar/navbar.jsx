@@ -84,7 +84,13 @@ export default function Navbar() {
             onClick={event => go(event, 'aboutMe')}
             data-cursor="hover"
           >
-            <span className="nav-monogram">JC</span>
+            <img
+              className="nav-monogram"
+              src="/dev-icon.svg"
+              alt=""
+              width={36}
+              height={36}
+            />
             <span className="nav-brand-text">
               <strong>{profile.firstName} {profile.lastName}</strong>
               <span className="mono nav-brand-role">{profile.role}</span>
