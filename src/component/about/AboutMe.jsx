@@ -99,6 +99,9 @@ export default function AboutMe() {
                 <motion.img
                   src={profile.avatar}
                   alt={`Retrato de ${profile.firstName} ${profile.lastName}`}
+                  width={871}
+                  height={960}
+                  fetchPriority="high"
                   decoding="async"
                   initial={reduce ? false : { scale: 1.22 }}
                   animate={reduce ? undefined : { scale: 1 }}
@@ -142,8 +145,12 @@ export default function AboutMe() {
 
               <Magnetic strength={0.2}>
                 <a
-                  href={`mailto:${profile.email}`}
+                  href="#contactMe"
                   className="btn btn--lg"
+                  onClick={event => {
+                    event.preventDefault();
+                    scrollToSection('contactMe');
+                  }}
                   data-cursor="hover"
                 >
                   Escribime

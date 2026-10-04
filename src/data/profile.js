@@ -3,6 +3,9 @@
  * sean puramente presentacionales y actualizar el CV sea un solo archivo.
  */
 
+// Local y redimensionada (960px, ~130KB): la original remota pesaba ~840KB.
+import avatar from '../assets/profile.jpg';
+
 export const CAREER_START_YEAR = 2021;
 
 export const profile = {
@@ -12,7 +15,7 @@ export const profile = {
   location: 'Córdoba, Argentina',
   email: 'cordobajava@gmail.com',
   phone: '+54 9 3546 416552',
-  avatar: 'https://i.ibb.co/W3wYp01/profile.jpg',
+  avatar,
   available: true,
   // Getter: los años salen calculados para que la presentación no quede
   // desactualizada sola el 1 de enero.

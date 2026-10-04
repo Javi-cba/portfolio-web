@@ -134,7 +134,7 @@
 
 .hero-portrait {
   position: relative;
-  width: clamp(11rem, 20vw, 17.5rem);
+  width: clamp(13rem, 26vw, 24rem);
   aspect-ratio: 4 / 5;
 }
 
@@ -185,14 +185,19 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: var(--img-filter);
   transition: filter var(--t-slow) var(--ease-out),
     transform var(--t-slow) var(--ease-out);
 }
 
+/* Color siempre; el hover acerca la foto y la "revela": más saturación y
+   sin grano, en vez de alternar a blanco y negro. */
 .hero-portrait:hover img {
-  filter: none;
-  transform: scale(1.05);
+  filter: saturate(1.2) contrast(1.06);
+  transform: scale(1.06);
+}
+
+.hero-portrait:hover .hero-portrait-grain {
+  opacity: 0;
 }
 
 /*
@@ -205,6 +210,7 @@
   inset: 0;
   pointer-events: none;
   opacity: 0.22;
+  transition: opacity var(--t-slow) var(--ease-out);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -382,20 +388,23 @@
    RESPONSIVE
    ============================================================ */
 @media (max-width: 900px) {
-  /* En mobile el retrato pasa arriba del nombre, a ancho completo de columna */
+  /* En mobile nombre y retrato siguen en la misma fila (foto a la derecha),
+     centrados entre sí y sin el desfase vertical de desktop. */
+  .hero {
+    padding-top: calc(var(--nav-h) + clamp(1.25rem, 4vh, 2.5rem));
+  }
+
   .hero-head {
-    grid-template-columns: 1fr;
-    gap: clamp(1.25rem, 4vw, 2rem);
+    gap: clamp(1rem, 4vw, 2rem);
+    align-items: center;
   }
 
   .hero-visual {
-    justify-content: flex-start;
-    order: -1;
     transform: none;
   }
 
   .hero-portrait {
-    width: clamp(9.5rem, 42vw, 14rem);
+    width: clamp(7rem, 30vw, 13rem);
   }
 
   .caps {
@@ -417,9 +426,29 @@
     display: none;
   }
 
+  /* El nombre comparte fila con la foto: se achica para que "Córdoba"
+     entre completo al lado del retrato. */
+  .hero-line {
+    font-size: clamp(2.4rem, 11.5vw, 4.5rem);
+  }
+
   .hero-line--indent {
     padding-left: 0;
     -webkit-text-stroke: 1px var(--ink);
+  }
+
+  /* Placa y contorno más pegados para no comerse el gutter lateral */
+  .hero-portrait-plate {
+    transform: translate(9px, 9px);
+  }
+
+  .hero-portrait::before {
+    transform: translate(5px, 5px);
+  }
+
+  /* El rótulo vertical chocaba con el nombre */
+  .hero-portrait-caption {
+    display: none;
   }
 
   .hero-stats {
