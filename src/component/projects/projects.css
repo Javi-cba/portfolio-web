@@ -16,7 +16,7 @@
 .work-row {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 0 clamp(0.75rem, 2vw, 1.75rem);
   padding-block: clamp(1.1rem, 2.4vw, 1.75rem);
@@ -178,13 +178,6 @@
   border-radius: 50%;
   background: currentColor;
   flex: none;
-}
-
-.work-tech,
-.work-year {
-  color: var(--ink-3);
-  white-space: nowrap;
-  transition: color var(--t-med) var(--ease-out);
 }
 
 /* --- Acciones --- */
@@ -697,16 +690,6 @@
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media (max-width: 1100px) {
-  .work-row {
-    grid-template-columns: minmax(0, 1fr) auto auto;
-  }
-
-  .work-tech {
-    display: none;
-  }
-}
-
 @media (max-width: 820px) {
   .work-row {
     grid-template-columns: minmax(0, 1fr) auto;

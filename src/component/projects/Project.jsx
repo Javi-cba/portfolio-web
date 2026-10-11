@@ -3,12 +3,6 @@ import Reveal from '../Reveal';
 import { GithubIcon } from '../icons';
 import './projects.css';
 
-/** Muestra el lenguaje principal y un topic, que es lo que cabe en la fila. */
-function primaryTech(tecnology) {
-  if (!Array.isArray(tecnology)) return '';
-  return tecnology.filter(Boolean).slice(0, 2).join(' / ');
-}
-
 export default function Project({
   name,
   description,
@@ -16,11 +10,9 @@ export default function Project({
   urlProject,
   urlRepo,
   urlImg,
-  updatedAt,
   inDevelopment,
   onOpen,
 }) {
-  const year = updatedAt ? new Date(updatedAt).getFullYear() : null;
   const topics = Array.isArray(tecnology) ? tecnology.filter(Boolean) : [];
 
   const detail = (
@@ -87,9 +79,6 @@ export default function Project({
           </button>
         </h3>
 
-        <span className="mono work-tech">{primaryTech(tecnology)}</span>
-
-        {/* Badge y año comparten celda: la grilla mantiene sus columnas. */}
         <div className="work-meta">
           {inDevelopment && (
             <span className="mono work-wip">
@@ -97,7 +86,6 @@ export default function Project({
               En desarrollo
             </span>
           )}
-          {year && <span className="mono work-year">{year}</span>}
         </div>
 
         <div className="work-actions">
