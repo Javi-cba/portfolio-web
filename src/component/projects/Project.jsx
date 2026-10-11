@@ -1,11 +1,7 @@
-import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import clsx from 'clsx';
 import Reveal from '../Reveal';
 import { GithubIcon } from '../icons';
 import './projects.css';
-
-const EASE = [0.16, 1, 0.3, 1];
 
 /** Muestra el lenguaje principal y un topic, que es lo que cabe en la fila. */
 function primaryTech(tecnology) {
@@ -14,7 +10,6 @@ function primaryTech(tecnology) {
 }
 
 export default function Project({
-  index = 0,
   name,
   description,
   tecnology,
@@ -22,18 +17,10 @@ export default function Project({
   urlRepo,
   urlImg,
   updatedAt,
-  isActive,
-  isDimmed,
-  canHover,
-  onHover,
   onOpen,
 }) {
-  const reduce = useReducedMotion();
   const year = updatedAt ? new Date(updatedAt).getFullYear() : null;
   const topics = Array.isArray(tecnology) ? tecnology.filter(Boolean) : [];
-
-  // Sin hover (touch) la fila va siempre desplegada: no hay forma de abrirla.
-  const expanded = canHover ? isActive : true;
 
   const detail = (
     <div className="work-expand-inner">
@@ -77,24 +64,14 @@ export default function Project({
   );
 
   return (
-    <Reveal
-      as="li"
-      className={clsx('work', isActive && 'is-active', isDimmed && 'is-dimmed')}
-      y={26}
-      amount={0.25}
-      onPointerEnter={onHover}
-    >
+    <Reveal as="li" className="work" y={26} amount={0.25}>
       <div className="work-row">
-        <span className="mono work-index">
-          {String(index + 1).padStart(2, '0')}
-        </span>
 
         <h3 className="work-title display">
           <button
             type="button"
             className="work-open"
             onClick={onOpen}
-            onFocus={onHover}
             data-cursor="label"
             data-cursor-label="Ver"
           >
@@ -130,31 +107,20 @@ export default function Project({
               href={urlProject}
               target="_blank"
               rel="noreferrer"
-              className="work-icon"
-              aria-label={`Abrir el sitio de ${name}`}
+              className="work-live mono"
+              aria-label={`Ver ${name} en vivo`}
               data-cursor="hover"
             >
-              <ArrowUpRight size={16} strokeWidth={1.7} />
+              <span className="work-live-dot" aria-hidden="true" />
+              Ver en vivo
+              <ArrowUpRight size={14} strokeWidth={1.8} />
             </a>
           )}
         </div>
       </div>
 
-      {canHover && !reduce ? (
-        <motion.div
-          className="work-expand"
-          initial={false}
-          animate={{ height: expanded ? 'auto' : 0, opacity: expanded ? 1 : 0 }}
-          transition={{
-            height: { duration: 0.55, ease: EASE },
-            opacity: { duration: expanded ? 0.4 : 0.2, delay: expanded ? 0.1 : 0 },
-          }}
-        >
-          {detail}
-        </motion.div>
-      ) : (
-        <div className="work-expand is-static">{detail}</div>
-      )}
+      {/* Siempre desplegado: imagen, descripción y tags a la vista. */}
+      <div className="work-expand">{detail}</div>
     </Reveal>
   );
 }

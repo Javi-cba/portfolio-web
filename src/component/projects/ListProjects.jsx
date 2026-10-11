@@ -4,7 +4,6 @@ import SubTittle from '../SubTittle';
 import { GithubIcon } from '../icons';
 import Reveal from '../Reveal';
 import Project from './Project';
-import useMediaQuery from '../../hooks/useMediaQuery';
 import { getProjects } from '../../services/gitHubServ';
 import { refreshScrollTriggers } from '../../hooks/useSmoothScroll';
 import { profile } from '../../data/profile';
@@ -18,11 +17,8 @@ const SKELETON_ROWS = 4;
 export default function ListProjects() {
   const [projects, setProjects] = useState([]);
   const [status, setStatus] = useState('loading');
-  const [hovered, setHovered] = useState(null);
   const [detail, setDetail] = useState(null);
   const [detailOpen, setDetailOpen] = useState(false);
-
-  const canHover = useMediaQuery('(hover: hover) and (pointer: fine)');
 
   useEffect(() => {
     let cancelled = false;
@@ -58,9 +54,7 @@ export default function ListProjects() {
 
   return (
     <div className="shell">
-      <SubTittle text="Proyectos" index="04" eyebrow="Selected works">
-        Repositorios públicos traídos en vivo desde mi GitHub. Pasá el cursor por
-        uno para verlo y abrilo para leer su documentación completa.
+      <SubTittle text="Proyectos" index="04">
       </SubTittle>
 
       {status === 'error' && (
@@ -83,7 +77,6 @@ export default function ListProjects() {
         <ul className="works" aria-hidden="true">
           {Array.from({ length: SKELETON_ROWS }).map((_, i) => (
             <li className="work work--skeleton" key={i}>
-              <span className="skeleton skeleton-index" />
               <span className="skeleton skeleton-title" />
               <span className="skeleton skeleton-tech" />
             </li>
@@ -98,11 +91,10 @@ export default function ListProjects() {
       )}
 
       {status === 'ready' && projects.length > 0 && (
-        <ul className="works" onPointerLeave={() => setHovered(null)}>
-          {projects.map((item, index) => (
+        <ul className="works">
+          {projects.map(item => (
             <Project
               key={item.id ?? item.name}
-              index={index}
               name={item.name}
               description={item.description}
               tecnology={item.topics}
@@ -110,10 +102,6 @@ export default function ListProjects() {
               urlRepo={item.html_url}
               urlImg={item.urlImg}
               updatedAt={item.pushed_at}
-              canHover={canHover}
-              isActive={hovered === index}
-              isDimmed={canHover && hovered !== null && hovered !== index}
-              onHover={() => setHovered(index)}
               onOpen={() => openDetail(item)}
             />
           ))}

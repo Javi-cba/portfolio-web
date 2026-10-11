@@ -17,6 +17,12 @@
   padding-block: clamp(3rem, 6vw, 6rem);
 }
 
+/* Trayectoria termina en tarjetas chicas: con el padding completo quedaba
+   un hueco enorme antes de Stack. */
+#experience {
+  padding-bottom: clamp(3rem, 6vw, 5.5rem);
+}
+
 .section--line {
   border-top: 1px solid var(--line);
 }
@@ -362,4 +368,103 @@
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
+}
+
+/* --- Degradados verdes de fondo (toda la página) ---
+ * Opacidad baja y movimiento lento para sumar profundidad sin romper el tono
+ * minimalista. Solo transform (compositor), nada de repintar el blur.
+ */
+.bg-glow {
+  /* Fijo al viewport: acompaña el scroll por toda la página. */
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: opacity 1.2s var(--ease-out);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-glow.is-dim {
+  opacity: 0.4;
+}
+
+.bg-glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    var(--accent) 0%,
+    transparent 68%
+  );
+  filter: blur(40px);
+  opacity: 0.34;
+  will-change: transform;
+}
+
+.bg-glow-blob--a {
+  width: 46vw;
+  height: 46vw;
+  max-width: 720px;
+  max-height: 720px;
+  top: -14%;
+  right: -8%;
+  animation: bg-drift-a 15s ease-in-out infinite alternate;
+}
+
+.bg-glow-blob--b {
+  width: 38vw;
+  height: 38vw;
+  max-width: 600px;
+  max-height: 600px;
+  bottom: -10%;
+  left: -10%;
+  opacity: 0.26;
+  animation: bg-drift-b 18s ease-in-out infinite alternate;
+}
+
+.bg-glow-blob--c {
+  width: 26vw;
+  height: 26vw;
+  max-width: 420px;
+  max-height: 420px;
+  top: 38%;
+  left: 42%;
+  opacity: 0.2;
+  animation: bg-drift-c 12s ease-in-out infinite alternate;
+}
+
+:root[data-theme='dark'] .bg-glow-blob {
+  opacity: 0.22;
+}
+
+:root[data-theme='dark'] .bg-glow-blob--b {
+  opacity: 0.16;
+}
+
+:root[data-theme='dark'] .bg-glow-blob--c {
+  opacity: 0.12;
+}
+
+@keyframes bg-drift-a {
+  to {
+    transform: translate(-16vw, 14vh) scale(1.15);
+  }
+}
+
+@keyframes bg-drift-b {
+  to {
+    transform: translate(18vw, -12vh) scale(1.2);
+  }
+}
+
+@keyframes bg-drift-c {
+  to {
+    transform: translate(-14vw, -16vh) scale(0.85);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-glow-blob {
+    animation: none;
+  }
 }

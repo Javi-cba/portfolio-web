@@ -10,6 +10,7 @@
   overflow: hidden;
 }
 
+
 /* --- Fila de metadatos --- */
 .hero-meta {
   display: flex;
@@ -63,6 +64,92 @@
   padding-left: clamp(0px, 8vw, 9rem);
   color: transparent;
   -webkit-text-stroke: 1.4px var(--ink);
+}
+
+/* --- Etiquetas HTML decorativas (detalle de fondo) ---
+ * Todas van en absoluto sobre los bordes del contenido, así no mueven nada
+ * del layout. Sangría por nivel: html > body > h1/p.
+ */
+.hero-title {
+  position: relative;
+  justify-self: start;
+}
+
+.hero-intro,
+.hero-lede {
+  position: relative;
+}
+
+.hero {
+  --code-indent: 2.2ch;
+}
+
+.hero-code,
+.hero-lede::before,
+.hero-lede::after {
+  position: absolute;
+  z-index: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  /* Tono del acento y muy bajo: se lee como recurso de diseño, no como
+     código que se filtró. */
+  color: var(--accent);
+  opacity: 0.32;
+  pointer-events: none;
+  user-select: none;
+  white-space: pre;
+}
+
+.hero-code {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-code-l1 {
+  padding-left: var(--code-indent);
+}
+
+.hero-code-l2 {
+  padding-left: calc(var(--code-indent) * 2);
+}
+
+/* Bloque <html>/<body>/<h1> pegado al borde superior de las letras: la
+   caja de línea del título deja aire arriba de los glifos. */
+.hero-code--open {
+  left: 0;
+  bottom: 100%;
+  margin-bottom: -0.9rem;
+}
+
+/* </h1> al final de "Córdoba", como cierre de línea */
+.hero-code--close {
+  left: 100%;
+  bottom: 0.9em;
+  margin-left: 1rem;
+}
+
+.hero-lede::before,
+.hero-lede::after {
+  left: calc(var(--code-indent) * 2);
+}
+
+.hero-lede::before {
+  content: '<p>';
+  bottom: 100%;
+}
+
+.hero-lede::after {
+  content: '</p>';
+  top: 100%;
+}
+
+.hero-code--end {
+  left: 0;
+  top: 100%;
+  margin-top: 0.6rem;
 }
 
 /* --- Cuerpo: intro + retrato --- */
@@ -288,115 +375,6 @@
   border-radius: 50%;
 }
 
-/* --- Ticker --- */
-.hero-ticker {
-  border-block: 1px solid var(--line);
-  padding-block: clamp(0.7rem, 1.5vw, 1.1rem);
-  background: var(--paper-2);
-}
-
-.hero-ticker-item {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
-  padding-right: clamp(1.25rem, 3vw, 2.5rem);
-  font-size: clamp(1.5rem, 3.4vw, 2.6rem);
-  color: var(--ink-2);
-  white-space: nowrap;
-}
-
-.hero-ticker-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex: none;
-}
-
-/* ============================================================
-   CAPACIDADES — "En qué ayudo"
-   ============================================================ */
-.caps {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: start;
-}
-
-.caps-aside {
-  position: sticky;
-  top: calc(var(--nav-h) + 2.5rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.caps-eyebrow {
-  color: var(--accent);
-}
-
-.caps-objective {
-  font-size: var(--step-1);
-  line-height: 1.45;
-  color: var(--ink);
-  max-width: 34ch;
-  text-wrap: pretty;
-}
-
-.caps-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.caps-item {
-  display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr);
-  gap: 1rem;
-  padding-block: clamp(1.6rem, 3vw, 2.4rem);
-  border-top: 1px solid var(--line);
-  transition: border-color var(--t-med) var(--ease-out);
-}
-
-.caps-item:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.caps-item:hover {
-  border-top-color: var(--line-strong);
-}
-
-.caps-index {
-  color: var(--ink-3);
-  padding-top: 0.4rem;
-}
-
-.caps-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.caps-title {
-  font-size: var(--step-2);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  transition: color var(--t-fast) var(--ease-out);
-}
-
-.caps-item:hover .caps-title {
-  color: var(--accent);
-}
-
-.caps-text {
-  color: var(--ink-2);
-  max-width: 52ch;
-  text-wrap: pretty;
-}
-
-.caps-tags {
-  margin-top: 0.2rem;
-}
-
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -420,14 +398,6 @@
 
   .hero-portrait {
     width: clamp(7rem, 30vw, 13rem);
-  }
-
-  .caps {
-    grid-template-columns: 1fr;
-  }
-
-  .caps-aside {
-    position: static;
   }
 }
 
@@ -466,15 +436,23 @@
     display: none;
   }
 
+  .hero {
+    --code-indent: 1.2ch;
+  }
+
+  /* En mobile el nombre ocupa todo el ancho: el cierre va debajo */
+  .hero-code--close {
+    left: 0;
+    bottom: auto;
+    top: 100%;
+    margin-left: 0;
+  }
+
   .hero-stats {
     gap: 1.5rem 2rem;
   }
 
   .hero-scroll {
     display: none;
-  }
-
-  .caps-item {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
   }
 }

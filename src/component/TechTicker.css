@@ -1,0 +1,59 @@
+/* ============================================================
+   TICKER DE TECNOLOGÍAS (pie del hero)
+   ============================================================ */
+.tech-ticker {
+  padding-block: clamp(0.9rem, 2vw, 1.4rem);
+  border-block: 1px solid var(--line);
+  /* Translúcido: deja pasar el degradado verde de fondo en vez de cortarlo
+     con una franja opaca. */
+  background: color-mix(in srgb, var(--paper-2) 45%, transparent);
+}
+
+/* Los logos aparecen y se van con un fundido en los bordes */
+.tech-ticker .marquee {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.logo-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-inline: clamp(1.25rem, 3vw, 2.25rem);
+  border-right: 1px solid var(--line);
+}
+
+.logo-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex: none;
+  color: var(--ink-3);
+  transition: color var(--t-med) var(--ease-out),
+    transform var(--t-med) var(--ease-out);
+}
+
+.logo-item:hover .logo-icon {
+  color: var(--ink);
+  transform: scale(1.12);
+}
+
+.logo-name {
+  color: var(--ink-3);
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.logo-item:hover .logo-name {
+  color: var(--ink);
+}
+
+@media (max-width: 620px) {
+  .logo-name {
+    display: none;
+  }
+}

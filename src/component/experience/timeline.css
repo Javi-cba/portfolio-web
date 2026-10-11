@@ -90,6 +90,24 @@
   gap: 1rem;
 }
 
+.tl-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.tl-logo {
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.tl-head-text {
+  min-width: 0;
+}
+
 .tl-role {
   font-size: var(--step-2);
   font-weight: 500;
@@ -104,9 +122,20 @@
   color: var(--accent);
 }
 
+.tl-company-link.link-sweep {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: inherit;
+}
+
+.tl-company-link svg {
+  flex: none;
+}
+
 .tl-summary {
   color: var(--ink-2);
-  max-width: 58ch;
+  max-width: 78ch;
   text-wrap: pretty;
 }
 
@@ -114,7 +143,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  max-width: 62ch;
+  max-width: 82ch;
 }
 
 .tl-highlights li {
@@ -124,6 +153,12 @@
   font-size: var(--step--1);
   color: var(--ink-2);
   line-height: 1.5;
+}
+
+.tl-summary strong,
+.tl-highlights strong {
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .tl-bullet {
@@ -139,8 +174,8 @@
    FORMACIÓN
    ============================================================ */
 .edu {
-  margin-top: clamp(3rem, 6vw, 5rem);
-  padding-top: clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
   border-top: 1px solid var(--line);
 }
 
@@ -148,54 +183,13 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
   color: var(--ink-3);
 }
 
-.edu-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.edu-item {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem 2rem;
-  padding-block: 1.35rem;
-  border-bottom: 1px solid var(--line);
-  transition: padding-left var(--t-med) var(--ease-out);
-}
-
-.edu-item:hover {
-  padding-left: 0.6rem;
-}
-
-.edu-title {
-  font-size: var(--step-1);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-
-.edu-school {
-  margin-top: 0.2rem;
-  font-size: var(--step--1);
-  color: var(--ink-2);
-}
-
-.edu-meta {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--ink-3);
-}
-
-.edu-note {
-  padding: 0.2rem 0.55rem;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  color: var(--accent);
+/* La última experiencia no necesita aire extra antes de Formación */
+.tl-item:last-child {
+  padding-bottom: 0;
 }
 
 /* ============================================================
@@ -246,10 +240,5 @@
   /* Indentación mínima para que el riel vertical no cruce el texto */
   .tl-content {
     padding-left: 1.6rem;
-  }
-
-  .edu-item {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }

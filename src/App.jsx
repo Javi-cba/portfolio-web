@@ -1,8 +1,8 @@
 import Navbar from './component/navbar/navbar';
 import Cursor from './component/Cursor';
+import BackgroundGlow from './component/BackgroundGlow';
 import SubTittle from './component/SubTittle';
 import AboutMe from './component/about/AboutMe';
-import Capabilities from './component/about/Capabilities';
 import Timeline from './component/experience/Timeline';
 import ListSkills from './component/experience/ListSkills';
 import ListProjects from './component/projects/ListProjects';
@@ -20,24 +20,19 @@ function App() {
         Saltar al contenido
       </a>
 
+      <BackgroundGlow />
+
       <Cursor />
       <Navbar />
 
       <main id="main">
         <section id="aboutMe">
           <AboutMe />
-
-          <div className="section section--tight">
-            <Capabilities />
-          </div>
         </section>
 
         <section id="experience" className="section section--line">
           <div className="shell">
             <SubTittle text="Trayectoria" index="02" eyebrow="Experiencia">
-              Cinco años construyendo software de gestión, integraciones y
-              productos con IA — desde el modelo de datos hasta la puesta en
-              producción.
             </SubTittle>
           </div>
           <Timeline />
@@ -51,7 +46,7 @@ function App() {
           <ListSkills />
         </section>
 
-        <section id="projects" className="section section--line">
+        <section id="projects" className="section">
           <ListProjects />
         </section>
 

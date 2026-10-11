@@ -1,11 +1,19 @@
 import { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
-import { GraduationCap } from 'lucide-react';
+import { ArrowUpRight, GraduationCap } from 'lucide-react';
 import Reveal from '../Reveal';
 import { education, experience } from '../../data/profile';
 import './timeline.css';
 
-export default function Timeline() {
+/** Convierte `**texto**` en <strong> para resaltar lo importante. */
+function emphasize(text) {
+  return text
+    .split(/\*\*(.+?)\*\*/g)
+    .map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part));
+}
+
+/** Riel + lista. Lo usan tanto la experiencia laboral como la formación. */
+function TimelineList({ items }) {
   const trackRef = useRef(null);
 
   // La línea vertical se "dibuja" según el avance del scroll sobre la lista.
@@ -20,38 +28,68 @@ export default function Timeline() {
   });
 
   return (
-    <div className="shell">
-      <div className="tl" ref={trackRef}>
-        <div className="tl-rail" aria-hidden="true">
-          <motion.span className="tl-rail-fill" style={{ scaleY }} />
-        </div>
+    <div className="tl" ref={trackRef}>
+      <div className="tl-rail" aria-hidden="true">
+        <motion.span className="tl-rail-fill" style={{ scaleY }} />
+      </div>
 
-        <ol className="tl-list">
-          {experience.map((job, index) => (
-            <li className="tl-item" key={job.id}>
+      <ol className="tl-list">
+        {items.map((item, index) => {
+          const badge = item.badge ?? (item.current ? 'Actualidad' : null);
+
+          return (
+            <li className="tl-item" key={item.id}>
               <Reveal className="tl-marker" y={0} duration={0.6} delay={0.1}>
-                <span className={job.current ? 'tl-dot is-current' : 'tl-dot'} />
+                <span
+                  className={item.current ? 'tl-dot is-current' : 'tl-dot'}
+                />
               </Reveal>
 
               <Reveal className="tl-period" y={18} delay={index * 0.05}>
-                <span className="mono">{job.period}</span>
-                {job.current && (
-                  <span className="tl-now mono">Actual</span>
-                )}
+                <span className="mono">{item.period}</span>
+                {badge && <span className="tl-now mono">{badge}</span>}
               </Reveal>
 
               <div className="tl-content">
-                <Reveal y={22} delay={0.05 + index * 0.05}>
-                  <h3 className="tl-role">{job.role}</h3>
-                  <p className="tl-company">{job.company}</p>
+                <Reveal className="tl-head" y={22} delay={0.05 + index * 0.05}>
+                  {item.logo && (
+                    <img
+                      className="tl-logo"
+                      src={item.logo}
+                      alt=""
+                      width={44}
+                      height={44}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <div className="tl-head-text">
+                    <h3 className="tl-role">{item.role}</h3>
+                    <p className="tl-company">
+                      {item.url ? (
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="tl-company-link link-sweep"
+                          data-cursor="hover"
+                        >
+                          {item.company}
+                          <ArrowUpRight size={14} strokeWidth={1.8} />
+                        </a>
+                      ) : (
+                        item.company
+                      )}
+                    </p>
+                  </div>
                 </Reveal>
 
                 <Reveal y={20} delay={0.12 + index * 0.05}>
-                  <p className="tl-summary">{job.summary}</p>
+                  <p className="tl-summary">{emphasize(item.summary)}</p>
                 </Reveal>
 
                 <ul className="tl-highlights">
-                  {job.highlights.map((highlight, i) => (
+                  {item.highlights.map((highlight, i) => (
                     <Reveal
                       as="li"
                       key={highlight}
@@ -60,13 +98,13 @@ export default function Timeline() {
                       amount={0.4}
                     >
                       <span className="tl-bullet" aria-hidden="true" />
-                      {highlight}
+                      <span>{emphasize(highlight)}</span>
                     </Reveal>
                   ))}
                 </ul>
 
                 <Reveal className="tag-row" y={16} delay={0.2}>
-                  {job.stack.map(tech => (
+                  {item.stack.map((tech) => (
                     <span className="tag" key={tech}>
                       {tech}
                     </span>
@@ -74,9 +112,17 @@ export default function Timeline() {
                 </Reveal>
               </div>
             </li>
-          ))}
-        </ol>
-      </div>
+          );
+        })}
+      </ol>
+    </div>
+  );
+}
+
+export default function Timeline() {
+  return (
+    <div className="shell">
+      <TimelineList items={experience} />
 
       <div className="edu">
         <Reveal className="edu-head" y={16}>
@@ -84,26 +130,7 @@ export default function Timeline() {
           <span className="mono">Formación</span>
         </Reveal>
 
-        <ul className="edu-list">
-          {education.map((item, index) => (
-            <Reveal
-              as="li"
-              className="edu-item"
-              key={item.id}
-              y={20}
-              delay={index * 0.07}
-            >
-              <div className="edu-main">
-                <h3 className="edu-title">{item.title}</h3>
-                <p className="edu-school">{item.school}</p>
-              </div>
-              <div className="edu-meta">
-                <span className="mono edu-period">{item.period}</span>
-                {item.note && <span className="mono edu-note">{item.note}</span>}
-              </div>
-            </Reveal>
-          ))}
-        </ul>
+        <TimelineList items={education} />
       </div>
     </div>
   );

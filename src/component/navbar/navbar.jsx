@@ -8,13 +8,38 @@ import { navLinks, profile } from '../../data/profile';
 import { lockScroll, scrollToSection } from '../../hooks/useSmoothScroll';
 import './navbar.css';
 
-const SECTION_IDS = [...navLinks.map(link => link.id), 'contactMe'];
+const SECTIONS = [...navLinks, { id: 'contactMe', slug: 'contacto' }];
+const SECTION_IDS = SECTIONS.map(section => section.id);
+const SLUG_BY_ID = Object.fromEntries(SECTIONS.map(s => [s.id, s.slug]));
+const ID_BY_SLUG = Object.fromEntries(SECTIONS.map(s => [s.slug, s.id]));
+const QUERY_KEY = 'seccion';
+
+function initialSectionId() {
+  if (typeof window === 'undefined') return SECTION_IDS[0];
+  const slug = new URLSearchParams(window.location.search).get(QUERY_KEY);
+  return ID_BY_SLUG[slug] ?? SECTION_IDS[0];
+}
+
+/** Refleja la sección visible en la URL sin sumar entradas al historial. */
+function syncSectionParam(id) {
+  const url = new URL(window.location.href);
+  const slug = SLUG_BY_ID[id];
+  // Perfil es la portada: la URL queda limpia.
+  if (!slug || id === SECTION_IDS[0]) url.searchParams.delete(QUERY_KEY);
+  else url.searchParams.set(QUERY_KEY, slug);
+  url.hash = '';
+  if (url.href !== window.location.href) {
+    window.history.replaceState(window.history.state, '', url);
+  }
+}
 const EASE = [0.16, 1, 0.3, 1];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState('aboutMe');
+  // Arranca con la sección pedida por URL para que la sincronización no borre
+  // el parámetro antes de llegar a hacer el scroll.
+  const [active, setActive] = useState(initialSectionId);
 
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
@@ -52,6 +77,20 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    syncSectionParam(active);
+  }, [active]);
+
+  // Link compartido con `?seccion=…`: al cargar, vamos directo a esa sección.
+  // Esperamos un poco a que el hero y los datos asíncronos asienten la altura.
+  useEffect(() => {
+    const id = initialSectionId();
+    if (id === SECTION_IDS[0]) return undefined;
+
+    const timer = setTimeout(() => scrollToSection(id, { duration: 0.9 }), 450);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     lockScroll(menuOpen);
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => {
@@ -79,7 +118,7 @@ export default function Navbar() {
       <header className={clsx('nav', scrolled && 'is-scrolled')}>
         <div className="nav-inner shell">
           <a
-            href="#aboutMe"
+            href="/"
             className="nav-brand"
             onClick={event => go(event, 'aboutMe')}
             data-cursor="hover"
@@ -101,11 +140,16 @@ export default function Navbar() {
             {navLinks.map(link => (
               <a
                 key={link.id}
-                href={`#${link.id}`}
-                className={clsx('nav-link', active === link.id && 'is-active')}
+                href={`?${QUERY_KEY}=${link.slug}`}
+                className={clsx(
+                  'nav-link',
+                  link.featured && 'nav-link--featured',
+                  active === link.id && 'is-active'
+                )}
                 onClick={event => go(event, link.id)}
                 data-cursor="hover"
               >
+                {link.featured && <span className="nav-link-dot" aria-hidden />}
                 <span>{link.label}</span>
               </a>
             ))}
@@ -116,7 +160,7 @@ export default function Navbar() {
 
             <Magnetic className="nav-cta-wrap" strength={0.18}>
               <a
-                href="#contactMe"
+                href={`?${QUERY_KEY}=contacto`}
                 className="btn nav-cta"
                 onClick={event => go(event, 'contactMe')}
                 data-cursor="hover"
@@ -154,12 +198,15 @@ export default function Navbar() {
             transition={{ duration: 0.7, ease: EASE }}
           >
             <nav className="nav-overlay-links">
-              {[...navLinks, { id: 'contactMe', label: 'Contacto' }].map(
+              {[...navLinks, { id: 'contactMe', label: 'Contacto', slug: 'contacto' }].map(
                 (link, i) => (
                   <span className="anim-line-mask" key={link.id}>
                     <motion.a
-                      href={`#${link.id}`}
-                      className="display nav-overlay-link anim-line"
+                      href={`?${QUERY_KEY}=${link.slug}`}
+                      className={clsx(
+                        'display nav-overlay-link anim-line',
+                        link.featured && 'nav-overlay-link--featured'
+                      )}
                       onClick={event => go(event, link.id)}
                       initial={{ y: '110%' }}
                       animate={{ y: '0%' }}

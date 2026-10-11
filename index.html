@@ -34,14 +34,12 @@
 
     <script>
       // Aplica el tema antes del primer paint para evitar el flash de color.
+      // Por defecto arranca en claro; solo usa oscuro si el usuario lo eligió.
       (function () {
         try {
           var saved = localStorage.getItem('jc-theme');
-          var prefersDark =
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches;
           document.documentElement.dataset.theme =
-            saved || (prefersDark ? 'dark' : 'light');
+            saved === 'dark' ? 'dark' : 'light';
         } catch (e) {
           document.documentElement.dataset.theme = 'light';
         }

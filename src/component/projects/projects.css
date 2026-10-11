@@ -16,28 +16,10 @@
 .work-row {
   position: relative;
   display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr) auto auto auto;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
   align-items: center;
   gap: 0 clamp(0.75rem, 2vw, 1.75rem);
   padding-block: clamp(1.1rem, 2.4vw, 1.75rem);
-}
-
-.work.is-dimmed {
-  opacity: 0.4;
-}
-
-.work.is-active {
-  border-bottom-color: var(--ink);
-}
-
-.work-index {
-  color: var(--ink-3);
-  align-self: center;
-  transition: color var(--t-med) var(--ease-out);
-}
-
-.work.is-active .work-index {
-  color: var(--accent);
 }
 
 /* --- Título con doble capa --- */
@@ -98,14 +80,10 @@
 }
 
 /* ============================================================
-   FILA EXPANDIDA (hover)
+   DETALLE (siempre desplegado)
    ============================================================ */
 .work-expand {
   overflow: hidden;
-}
-
-.work-expand.is-static {
-  height: auto;
 }
 
 .work-expand-inner {
@@ -113,9 +91,11 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: start;
-  padding: 0 0 clamp(1.5rem, 3vw, 2.25rem) 3.25rem;
+  padding: 0 0 clamp(1.5rem, 3vw, 2.25rem);
 }
 
+/* Caja fija 16:9 para que todas las capturas midan lo mismo; `contain`
+   muestra la imagen completa sin recortar ni estirar. */
 .work-shot {
   display: block;
   width: 100%;
@@ -123,20 +103,19 @@
   overflow: hidden;
   background: var(--paper-2);
   border: 1px solid var(--line);
+  border-radius: 14px;
 }
 
 .work-shot img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: var(--img-filter);
-  transition: filter var(--t-slow) var(--ease-out),
-    transform var(--t-slow) var(--ease-out);
+  object-fit: contain;
+  transition: transform var(--t-slow) var(--ease-out);
 }
 
 .work:hover .work-shot img {
-  filter: none;
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .work-detail {
@@ -178,11 +157,6 @@
   transition: color var(--t-med) var(--ease-out);
 }
 
-.work.is-active .work-tech,
-.work.is-active .work-year {
-  color: var(--ink-2);
-}
-
 /* --- Acciones --- */
 .work-actions {
   position: relative;
@@ -213,12 +187,85 @@
   transform: translateY(-2px);
 }
 
+/* --- "Ver en vivo": píldora de acento visible sin abrir el modal --- */
+.work-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.35rem;
+  padding: 0 1rem;
+  /* Mismo lenguaje que "Proyectos" en el navbar: tinte suave, no relleno */
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: transform var(--t-fast) var(--ease-out),
+    background-color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.work-live:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.work-live svg {
+  flex: none;
+  transition: transform var(--t-fast) var(--ease-out);
+}
+
+.work-live:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.work-live-dot {
+  position: relative;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #e5484d;
+  flex: none;
+}
+
+.work-live-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: work-live-ping 1.8s var(--ease-out) infinite;
+}
+
+@keyframes work-live-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-live-dot::after {
+    animation: none;
+  }
+}
+
 /* ============================================================
    ESTADOS: CARGA / ERROR / PIE
    ============================================================ */
 .work--skeleton {
   display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr) 6rem;
+  grid-template-columns: minmax(0, 1fr) 6rem;
   align-items: center;
   gap: 0 clamp(0.75rem, 2vw, 1.75rem);
   padding-block: clamp(1.1rem, 2.4vw, 1.75rem);
@@ -236,10 +283,6 @@
   );
   background-size: 200% 100%;
   animation: skeleton-slide 1.5s linear infinite;
-}
-
-.skeleton-index {
-  width: 1.5rem;
 }
 
 .skeleton-title {
@@ -283,12 +326,18 @@
   color: var(--ink-3);
 }
 
-.works-footer-link {
+/* Doble clase: `.link-sweep` (global, display inline-block) se carga después
+   y pisaba el flex, mandando la flecha a una segunda línea en mobile. */
+.works-footer-link.link-sweep {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   color: var(--ink);
   white-space: nowrap;
+}
+
+.works-footer-link svg {
+  flex: none;
 }
 
 /* ============================================================
@@ -620,7 +669,7 @@
    ============================================================ */
 @media (max-width: 1100px) {
   .work-row {
-    grid-template-columns: 3rem minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
   }
 
   .work-tech {
@@ -630,23 +679,15 @@
 
 @media (max-width: 820px) {
   .work-row {
-    grid-template-columns: 3rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      'index title'
+      'title title'
       'meta  actions';
     gap: 0.85rem 1rem;
     align-items: start;
     padding-block: 1.5rem;
   }
 
-  .work.is-dimmed {
-    opacity: 1;
-  }
-
-  .work-index {
-    grid-area: index;
-    padding-top: 0.35rem;
-  }
 
   .work-title {
     grid-area: title;
@@ -692,10 +733,6 @@
 }
 
 @media (max-width: 620px) {
-  .work-row {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-  }
-
   .modal {
     width: calc(100vw - 1.5rem);
     max-height: 90vh;

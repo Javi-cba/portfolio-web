@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Reveal, { AnimatedText, Counter } from '../Reveal';
 import Magnetic from '../Magnetic';
-import Marquee from '../Marquee';
+import TechTicker from '../TechTicker';
 import useParallax from '../../hooks/useParallax';
 import { scrollToSection } from '../../hooks/useSmoothScroll';
 import { getProfile } from '../../services/gitHubServ';
 import {
   profile,
   stack,
-  tickerWords,
   yearsOfExperience,
 } from '../../data/profile';
 import './about.css';
@@ -69,6 +68,12 @@ export default function AboutMe() {
             así queda a la altura del apellido en desktop. */}
         <div className="hero-head">
           <h1 className="hero-title">
+            {/* Etiquetas HTML decorativas de fondo, estilo editor de código. */}
+            <span className="hero-code hero-code--open" aria-hidden="true">
+              <span>&lt;html&gt;</span>
+              <span className="hero-code-l1">&lt;body&gt;</span>
+              <span className="hero-code-l2">&lt;h1&gt;</span>
+            </span>
             <AnimatedText
               as="span"
               text={profile.firstName}
@@ -82,6 +87,9 @@ export default function AboutMe() {
               stagger={0.045}
               delay={0.16}
             />
+            <span className="hero-code hero-code--close" aria-hidden="true">
+              &lt;/h1&gt;
+            </span>
           </h1>
 
           <div className="hero-visual">
@@ -123,8 +131,12 @@ export default function AboutMe() {
 
         <div className="hero-body">
           <div className="hero-intro">
+            <span className="hero-code hero-code--end" aria-hidden="true">
+              <span className="hero-code-l1">&lt;/body&gt;</span>
+              <span>&lt;/html&gt;</span>
+            </span>
             <Reveal y={20} delay={0.15}>
-              <p className="lede">{profile.intro}</p>
+              <p className="lede hero-lede">{profile.intro}</p>
             </Reveal>
 
             <Reveal className="hero-actions" y={20} delay={0.25}>
@@ -186,35 +198,10 @@ export default function AboutMe() {
               <span className="mono hero-stat-label">{stat.label}</span>
             </div>
           ))}
-
-          <button
-            type="button"
-            className="hero-scroll"
-            onClick={() => scrollToSection('experience')}
-            data-cursor="hover"
-          >
-            <span className="mono">Scroll</span>
-            <motion.span
-              className="hero-scroll-icon"
-              animate={reduce ? undefined : { y: [0, 5, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <ArrowDown size={15} strokeWidth={1.8} />
-            </motion.span>
-          </button>
         </Reveal>
       </div>
 
-      <div className="hero-ticker">
-        <Marquee speed={2.4}>
-          {tickerWords.map(word => (
-            <span className="hero-ticker-item display" key={word}>
-              {word}
-              <span className="hero-ticker-dot" aria-hidden="true" />
-            </span>
-          ))}
-        </Marquee>
-      </div>
+      <TechTicker />
     </div>
   );
 }

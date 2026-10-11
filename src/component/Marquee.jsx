@@ -31,12 +31,14 @@ export default function Marquee({
   children,
   speed = 2.2,
   reverse = false,
+  pauseOnHover = false,
   className,
   itemClassName,
 }) {
   const reduce = useReducedMotion();
   const baseX = useMotionValue(0);
   const direction = useRef(reverse ? -1 : 1);
+  const paused = useRef(false);
 
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -53,7 +55,7 @@ export default function Marquee({
   );
 
   useAnimationFrame((_, delta) => {
-    if (reduce) return;
+    if (reduce || paused.current) return;
 
     const factor = velocityFactor.get();
     if (factor < 0) direction.current = reverse ? 1 : -1;
@@ -66,7 +68,11 @@ export default function Marquee({
   });
 
   return (
-    <div className={clsx('marquee', className)}>
+    <div
+      className={clsx('marquee', className)}
+      onPointerEnter={pauseOnHover ? () => (paused.current = true) : undefined}
+      onPointerLeave={pauseOnHover ? () => (paused.current = false) : undefined}
+    >
       <motion.div className="marquee-track" style={reduce ? undefined : { x }}>
         {Array.from({ length: COPIES }).map((_, i) => (
           <div
