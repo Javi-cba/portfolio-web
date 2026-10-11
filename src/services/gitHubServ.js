@@ -64,6 +64,15 @@ function extractImageUrl(readmeContent) {
 // para ordenar el listado y se sacan de los tags que ve el usuario.
 const ORDER_TOPIC = /^order-(\d+)$/i;
 
+// Topic que marca un proyecto todavía en construcción: muestra un badge en el
+// listado y, como `order-N`, no aparece entre los tags.
+const DEV_TOPICS = ['in-development', 'en-desarrollo', 'wip'];
+
+/** Topics que son metadata del portfolio y no tecnologías. */
+function isMetaTopic(topic) {
+  return ORDER_TOPIC.test(topic) || DEV_TOPICS.includes(topic.toLowerCase());
+}
+
 function readOrder(topics) {
   for (const topic of topics) {
     const match = ORDER_TOPIC.exec(topic);
@@ -72,9 +81,9 @@ function readOrder(topics) {
   return Number.POSITIVE_INFINITY;
 }
 
-/** Topics visibles: sin `order-N`, en mayúsculas, sin guiones y sin repetidos. */
+/** Topics visibles: sin metadata, en mayúsculas, sin guiones y sin repetidos. */
 function buildTags(language, topics) {
-  const tags = [language, ...topics.filter(topic => !ORDER_TOPIC.test(topic))]
+  const tags = [language, ...topics.filter(topic => !isMetaTopic(topic))]
     .filter(Boolean)
     .map(topic => topic.replace(/-/g, ' ').toUpperCase().trim());
 
@@ -89,8 +98,8 @@ export function getProjects() {
         const resp = await Promise.all(
           Object.values(res.data)
             .map(item => ({ item, topics: item.topics ?? [] }))
-            // Solo los que tienen topics reales (`order-N` no cuenta como topic)
-            .filter(({ topics }) => topics.some(topic => !ORDER_TOPIC.test(topic)))
+            // Solo los que tienen topics reales (la metadata no cuenta como topic)
+            .filter(({ topics }) => topics.some(topic => !isMetaTopic(topic)))
             .map(async ({ item, topics }) => {
               // contenido del README.md
               let readmeContent = await getReadmeContent(item.name);
@@ -106,6 +115,9 @@ export function getProjects() {
                 name: item.name.replace(/-/g, ' '), // Reemplaza los guiones por espacios
                 topics: buildTags(item.language, topics),
                 order: readOrder(topics),
+                inDevelopment: topics.some(topic =>
+                  DEV_TOPICS.includes(topic.toLowerCase())
+                ),
                 urlImg: urlImg, // La URL de la imagen externa
                 readme: readmeContent,
               };

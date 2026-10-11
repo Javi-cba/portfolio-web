@@ -17,6 +17,7 @@ export default function Project({
   urlRepo,
   urlImg,
   updatedAt,
+  inDevelopment,
   onOpen,
 }) {
   const year = updatedAt ? new Date(updatedAt).getFullYear() : null;
@@ -87,7 +88,17 @@ export default function Project({
         </h3>
 
         <span className="mono work-tech">{primaryTech(tecnology)}</span>
-        {year && <span className="mono work-year">{year}</span>}
+
+        {/* Badge y año comparten celda: la grilla mantiene sus columnas. */}
+        <div className="work-meta">
+          {inDevelopment && (
+            <span className="mono work-wip">
+              <span className="work-wip-dot" aria-hidden="true" />
+              En desarrollo
+            </span>
+          )}
+          {year && <span className="mono work-year">{year}</span>}
+        </div>
 
         <div className="work-actions">
           {urlRepo && (

@@ -102,6 +102,7 @@ export default function ListProjects() {
               urlRepo={item.html_url}
               urlImg={item.urlImg}
               updatedAt={item.pushed_at}
+              inDevelopment={item.inDevelopment}
               onOpen={() => openDetail(item)}
             />
           ))}

@@ -150,6 +150,36 @@
 }
 
 /* --- Metadatos de la fila --- */
+.work-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Badge de proyecto en desarrollo (topic `in-development` en GitHub) */
+.work-wip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--signal) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--signal) 12%, transparent);
+  color: var(--signal);
+  font-size: var(--step--2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.work-wip-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
 .work-tech,
 .work-year {
   color: var(--ink-3);
@@ -693,7 +723,7 @@
     grid-area: title;
   }
 
-  .work-year {
+  .work-meta {
     grid-area: meta;
     align-self: center;
   }
