@@ -10,7 +10,7 @@
       content="Javier Córdoba — Desarrollador de Software Full-Stack. React, React Native, Node.js, ASP.NET, SQL y MongoDB. Proyectos, stack y contacto."
     />
     <meta name="author" content="Javier Córdoba" />
-    <meta name="theme-color" content="#f4f2ed" />
+    <meta name="theme-color" content="#0d0f0d" />
 
     <meta property="og:type" content="website" />
     <meta
@@ -34,14 +34,14 @@
 
     <script>
       // Aplica el tema antes del primer paint para evitar el flash de color.
-      // Por defecto arranca en claro; solo usa oscuro si el usuario lo eligió.
+      // Por defecto arranca en oscuro; solo usa claro si el usuario lo eligió.
       (function () {
         try {
           var saved = localStorage.getItem('jc-theme');
           document.documentElement.dataset.theme =
-            saved === 'dark' ? 'dark' : 'light';
+            saved === 'light' ? 'light' : 'dark';
         } catch (e) {
-          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.theme = 'dark';
         }
       })();
     </script>

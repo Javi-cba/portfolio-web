@@ -157,15 +157,15 @@ export default function AboutMe() {
 
               <Magnetic strength={0.2}>
                 <a
-                  href="#contactMe"
+                  href="#stack"
                   className="btn btn--lg"
                   onClick={event => {
                     event.preventDefault();
-                    scrollToSection('contactMe');
+                    scrollToSection('stack');
                   }}
                   data-cursor="hover"
                 >
-                  Escribime
+                  Stack
                   <ArrowUpRight size={16} strokeWidth={1.8} />
                 </a>
               </Magnetic>
